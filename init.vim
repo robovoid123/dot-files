@@ -1,8 +1,9 @@
-let mapleader=","
+let mapleader=" "
 " Basic stuff
 filetype plugin indent on
 set nocompatible
 syntax on
+let python_highlight_all=1
 set number relativenumber
 set tabstop=2
 set encoding=utf-8
@@ -30,7 +31,6 @@ let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 
-
 " Shortcutting split navigation, saving a keypress:
 	map <C-h> <C-w>h
 	map <C-j> <C-w>j
@@ -41,21 +41,37 @@ let NERDTreeMinimalUI = 1
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'vim-scripts/indentpython.vim'
+
+Plug 'valloric/youcompleteme'
+
+Plug 'davidhalter/jedi-vim'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'tpope/vim-surround'
 
-Plug 'scrooloose/syntastic'
+Plug 'yggdroot/indentline'
+
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 
 call plug#end()
 
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
 
 " Airline config
 let g:rehash256 = 1
@@ -73,31 +89,12 @@ hi CursorLineNr ctermfg=15
 hi VertSplit ctermfg=8 ctermbg=0
 hi Statement ctermfg=3
 
-
-" Coc config
-" Use <c-space> to trigger completion.
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
-
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-inoremap <silent><expr> <c-space> coc#refresh()
-
-
+let g:indentLine_color_term = 239
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " Keybindings
-inoremap ii <esc>
-vnoremap ii <esc>
-nnoremap ii i
+inoremap jk <esc>
+vnoremap jk <esc>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -116,3 +113,18 @@ ino <Down> <Nop>
 ino <Left> <Nop>
 ino <Right> <Nop>
 
+" Fix indentation
+au BufNewFile,BufRead *.js, *.html, *.css
+    \ set tabstop=2
+    \ set softtabstop=2
+    \ set shiftwidth=2
+
+" Python Stuffs
+"au BufNewFile,BufRead *.py
+    \ set tabstop=4
+    \ set softtabstop=4
+    \ set shiftwidth=4
+    \ set textwidth=79
+    \ set expandtab
+    \ set autoindent
+    \ set fileformat=unix

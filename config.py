@@ -36,8 +36,12 @@ try:
 except ImportError:
     pass
 
+# Constants
 mod = "mod4"
+terminal = "alacritty"
 
+
+# Keybindings
 keys = [
     Key([mod], "h", lazy.layout.shrink_main()),
     Key([mod], "l", lazy.layout.grow_main()),
@@ -61,7 +65,8 @@ keys = [
     # Unsplit = 1 window displayed, like Max layout, but still with
     # multiple stack panes
     Key([mod, "shift"], "Return", lazy.layout.toggle_split()),
-    Key([mod], "Return", lazy.spawn("konsole")),
+    Key([mod], "Return", lazy.spawn(terminal
+                                    )),
 
     # Toggle between different layouts as defined below
     Key([mod], "Tab", lazy.next_layout()),
@@ -76,34 +81,61 @@ keys = [
     Key([mod, "control"], "h", lazy.layout.decrease_ratio()),
 
     # bindings for everyday stuffs
-    Key([mod],"b",lazy.spawn("firefox")),
+    Key([mod], "b", lazy.spawn("brave-browser")),
+
+    Key([mod, "control"], "p", lazy.spawn("poweroff")),
+
+    Key([mod], "t", lazy.spawn(terminal + " -e htop")),
+    # This one is for sound
+    Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
+    # This is terminal filemanager
+    Key([mod], "m", lazy.spawn(terminal + " -e ranger")),
+    # Open this file 
+    Key([mod], "o", lazy.spawn(terminal + " -e nvim /home/robovoid/.config/qtile/config.py")),
+
+    # Dmenu stuffs
+    Key([mod, "control"], "Return",
+                lazy.spawn("dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb '#2f3640' -nf '#ffffff' -sb '#273c75' -sf '#dcdde1' -p 'dmenu:'")
+                ),
+
+
 
     # Change the volume if your keyboard has special volume keys.
     Key(
         [], "XF86AudioRaiseVolume",
-        lazy.spawn("amixer -c 0 -q set Master 2dB+")
+        lazy.spawn("amixer -c 0 set Master 1+ unmute")
     ),
     Key(
         [], "XF86AudioLowerVolume",
-        lazy.spawn("amixer -c 0 -q set Master 2dB-")
+        lazy.spawn("amixer -c 0 set Master 1- unmute")
     ),
-    # toggle is not working
+    # toggle sound
     Key(
         [], "XF86AudioMute",
-        lazy.spawn("amixer -c 0 -q set Master toggle")
+        lazy.spawn("amixer -q set Master toggle")
+    ),
+    # Change brightness
+    # dependency : light
+    Key(
+        [], "XF86MonBrightnessDown",
+        lazy.spawn("light -U 5")
+    ),
+        Key(
+        [], "XF86MonBrightnessUp",
+        lazy.spawn("light -A 5")
     ),
 ]
 
 def init_group_names():
-    return [("TER", {'layout': 'monadtall'}),
-            ("VIM", {'layout': 'monadtall'}),
-            ("WWW", {'layout': 'monadtall'}),
-            ("DOC", {'layout': 'monadtall'}),
-            ("MUC", {'layout': 'monadtall'}),
-            ("STM", {'layout': 'monadtall'}),
-            ("MSG", {'layout': 'monadtall'}),
-            ("VID", {'layout': 'monadtall'}),
-            ("GFX", {'layout': 'floating'})]
+    return [("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'floating'})]
 
 def init_groups():
     return [Group(name, **kwargs) for name, kwargs in group_names]
@@ -113,7 +145,7 @@ if __name__ in ["config", "__main__"]:
     group_names = init_group_names()
     groups = init_groups()
 
-##### SETS GROUPS KEYBINDINGS #####
+# SETS GROUPS KEYBINDINGS 
 
 for i, (name, kwargs) in enumerate(group_names, 1):
     keys.append(Key([mod], str(i), lazy.group[name].toscreen()))          # Switch to another group
@@ -124,7 +156,7 @@ border_defaults = dict(
         border_normal=('#7f8fa6'),
         border_focus=("#0097e6"),
         border_width=2,
-        margin=6,
+        margin=2,
         )
 
 layouts = [
@@ -149,48 +181,58 @@ screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.sep.Sep(foreground=color[3], padding=6,),
-                widget.CurrentLayout(
-                    foreground=color[0],
-                    bakground=color[1],
-                    ),
-                widget.CurrentLayoutIcon(scale=0.65, forground=color[0], bakground=color[1]),
-                widget.sep.Sep(foreground=color[0], padding=6),
+                widget.TextBox(text='', fontsize=20, foreground=color[0], padding=9,),
+
+                widget.sep.Sep(foreground=color[3], padding=3,),
+
                 widget.GroupBox(
-                    font='Ubuntu Bold',
-                    margin_x=0,
+                    margin_x=2,
                     margin_y=1,
-                    padding_x=5,
-                    padding_y=5,
-                    fontsize=9,
-                    borderwidth=3,
+                    padding_x=8,
+                    fontsize=20,
+                    borderwidth=1.5,
                     active=color[2],
                     inactive=color[0],
                     highlight_method='line',
                     highlight_color=['#273c75', '#273c75'],
                     spacing=0,
-                    this_current_screen_border='#192a56',
+                    this_current_screen_border='#273c75',
                     this_screen_border='#718093',
-                    padding=5,
                     ),
                 
-                widget.sep.Sep(foreground=color[3]), #add separator bars where deemed necessarhy
-                widget.Prompt(),
-                widget.WindowName(foreground=color[0]),
+                widget.sep.Sep(foreground=color[3], padding=100,),
+                widget.WindowName(foreground=color[0], font='Ubuntu', margin=3, fontsize=12,),
+                widget.sep.Sep(foreground=color[3], padding=100,),
+
+                widget.CheckUpdates(foreground=color[0], font='Ubuntu', distro='Fedora', colour_no_updates=color[0], colour_have_updates=color[0]),
+
+                widget.sep.Sep(foreground=color[3], padding=6,),
                 widget.TextBox(text='', fontsize=20, foreground=color[0]),
                 widget.Net(interface='wlp4s0', foreground=color[0]),
                 widget.sep.Sep(foreground=color[3], padding=6,),
+
                 widget.TextBox(text='', fontsize=30, foreground=color[0],),
                 widget.Battery(foreground=color[0], update_interval=10,  format='{char} {percent:1.0%}',),
-               # widget.BatteryIcon(battery='BAT0'),
-                widget.sep.Sep(foreground=color[3], padding=6),
+                #widget.BatteryIcon(battery='BAT0', theme_path="/home/robovoid/Stuffs/battery-icons"),
+                
+                widget.sep.Sep(foreground=color[3], padding=2),
                 widget.Systray(),
+                widget.sep.Sep(foreground=color[3], padding=2),
+
                 widget.TextBox(text='', fontsize=20, foreground=color[0]),
                 widget.Volume(fontsize=13, update_interval=0.0, foreground=color[0]),
-                widget.TextBox(text='', fontsize=13, foreground=color[0]),
-                widget.Clock(format='%H:%M %d/%m/%Y',fontsize=13,foreground=color[0]),
+
+                widget.sep.Sep(foreground=color[3], padding=3),
+
+                widget.TextBox(text='', fontsize=18, foreground=color[0]),
+                widget.Clock(format='%d/%m/%Y %H:%M',foreground=color[0]),
+
+                widget.sep.Sep(foreground=color[3], padding=2),
+                widget.CurrentLayoutIcon(scale=0.65, forground=color[0], bakground=color[1]),
+                widget.sep.Sep(foreground=color[3], padding=3),
+
             ],
-            24,background='#2f3640'
+            22,background='#2f3640', opacity=0.9,
         ),
     ),
 ]
