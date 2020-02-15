@@ -90,13 +90,17 @@ keys = [
     Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
     # This is terminal filemanager
     Key([mod], "m", lazy.spawn(terminal + " -e ranger")),
-    # Open this file 
-    Key([mod], "o", lazy.spawn(terminal + " -e nvim /home/robovoid/.config/qtile/config.py")),
+    # Open this file
+    Key([mod],
+        "o",
+        lazy.spawn(terminal +
+                   " -e nvim /home/robovoid/.config/qtile/config.py")),
 
     # Dmenu stuffs
     Key([mod, "control"], "Return",
-                lazy.spawn("dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb '#2f3640' -nf '#ffffff' -sb '#273c75' -sf '#dcdde1' -p 'dmenu:'")
-                ),
+        lazy.spawn(
+            "dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb '#2f3640' -nf '#ffffff' -sb '#273c75' -sf '#dcdde1' -p 'dmenu:'")
+        ),
 
 
 
@@ -120,11 +124,12 @@ keys = [
         [], "XF86MonBrightnessDown",
         lazy.spawn("light -U 5")
     ),
-        Key(
+    Key(
         [], "XF86MonBrightnessUp",
         lazy.spawn("light -A 5")
     ),
 ]
+
 
 def init_group_names():
     return [("", {'layout': 'monadtall'}),
@@ -137,31 +142,35 @@ def init_group_names():
             ("", {'layout': 'monadtall'}),
             ("", {'layout': 'floating'})]
 
+
 def init_groups():
     return [Group(name, **kwargs) for name, kwargs in group_names]
+
 
 if __name__ in ["config", "__main__"]:
 
     group_names = init_group_names()
     groups = init_groups()
 
-# SETS GROUPS KEYBINDINGS 
+# SETS GROUPS KEYBINDINGS
 
 for i, (name, kwargs) in enumerate(group_names, 1):
-    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))          # Switch to another group
-    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))   # Send current window to another group
+    # Switch to another group
+    keys.append(Key([mod], str(i), lazy.group[name].toscreen()))
+    # Send current window to another group
+    keys.append(Key([mod, "shift"], str(i), lazy.window.togroup(name)))
 
 
 border_defaults = dict(
-        border_normal=('#7f8fa6'),
-        border_focus=("#0097e6"),
-        border_width=2,
-        margin=2,
-        )
+    border_normal=('#7f8fa6'),
+    border_focus=("#0097e6"),
+    border_width=2,
+    margin=2,
+)
 
 layouts = [
     layout.Max(),
-    layout.Stack( **border_defaults, num_stacks=2),
+    layout.Stack(**border_defaults, num_stacks=2),
     layout.MonadTall(
         **border_defaults,
         ratio=0.60,
@@ -176,12 +185,14 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-color = ['#7f8fa6','#c23616','#dcdde1','#2f3640']
+color = ['#7f8fa6', '#c23616', '#dcdde1', '#2f3640']
 screens = [
     Screen(
         top=bar.Bar(
             [
-                widget.TextBox(text='', fontsize=20, foreground=color[0], padding=9,),
+                # fedora logo
+                widget.TextBox(text='', fontsize=25,
+                               foreground=color[0], padding=9,),
 
                 widget.sep.Sep(foreground=color[3], padding=3,),
 
@@ -190,49 +201,97 @@ screens = [
                     margin_y=1,
                     padding_x=8,
                     fontsize=20,
-                    borderwidth=1.5,
+                    borderwidth=2,
                     active=color[2],
                     inactive=color[0],
                     highlight_method='line',
+                    # group color
                     highlight_color=['#273c75', '#273c75'],
                     spacing=0,
-                    this_current_screen_border='#273c75',
+                    this_current_screen_border=color[2],
                     this_screen_border='#718093',
-                    ),
-                
+                ),
+
                 widget.sep.Sep(foreground=color[3], padding=100,),
-                widget.WindowName(foreground=color[0], font='Ubuntu', margin=3, fontsize=12,),
-                widget.sep.Sep(foreground=color[3], padding=100,),
+                widget.WindowName(
+                    foreground=color[0],
+                    font='Ubuntu',
+                    margin=3,
+                    fontsize=12,
+                ),
+                widget.sep.Sep(foreground=color[3],
+                               padding=100,
+                               ),
 
-                widget.CheckUpdates(foreground=color[0], font='Ubuntu', distro='Fedora', colour_no_updates=color[0], colour_have_updates=color[0]),
+                widget.CheckUpdates(foreground=color[0],
+                                    font='Ubuntu',
+                                    distro='Fedora',
+                                    colour_no_updates=color[0],
+                                    colour_have_updates=color[0],
+                                    ),
 
-                widget.sep.Sep(foreground=color[3], padding=6,),
-                widget.TextBox(text='', fontsize=20, foreground=color[0]),
-                widget.Net(interface='wlp4s0', foreground=color[0]),
-                widget.sep.Sep(foreground=color[3], padding=6,),
+                widget.sep.Sep(foreground=color[3],
+                               padding=4,
+                               ),
+                widget.Net(interface='wlp4s0',
+                           foreground=color[0],
+                           ),
+                widget.sep.Sep(foreground=color[3],
+                               padding=6,
+                               ),
 
-                widget.TextBox(text='', fontsize=30, foreground=color[0],),
-                widget.Battery(foreground=color[0], update_interval=10,  format='{char} {percent:1.0%}',),
-                #widget.BatteryIcon(battery='BAT0', theme_path="/home/robovoid/Stuffs/battery-icons"),
-                
-                widget.sep.Sep(foreground=color[3], padding=2),
+                widget.Battery(foreground=color[0],
+                               update_interval=10,
+                               format='{char} {percent:1.0%}',
+                               charge_char=u'▲',
+                               discharge_char=u'▼',
+                               ),
+
+                widget.sep.Sep(foreground=color[3],
+                               padding=2,
+                               ),
                 widget.Systray(),
-                widget.sep.Sep(foreground=color[3], padding=2),
+                widget.sep.Sep(foreground=color[3],
+                               padding=2,
+                               ),
 
-                widget.TextBox(text='', fontsize=20, foreground=color[0]),
-                widget.Volume(fontsize=13, update_interval=0.0, foreground=color[0]),
+                widget.TextBox(text='',
+                               fontsize=20,
+                               foreground=color[0],
+                               ),
+                widget.Volume(fontsize=13,
+                              update_interval=0.0,
+                              foreground=color[0],
+                              ),
 
-                widget.sep.Sep(foreground=color[3], padding=3),
+                widget.sep.Sep(foreground=color[3],
+                               padding=3,
+                               ),
 
-                widget.TextBox(text='', fontsize=18, foreground=color[0]),
-                widget.Clock(format='%d/%m/%Y %H:%M',foreground=color[0]),
+                widget.TextBox(text='',
+                               fontsize=20,
+                               foreground=color[0],
+                               ),
+                widget.Clock(format='%d/%m/%Y %H:%M',
+                             foreground=color[0],
+                             ),
 
-                widget.sep.Sep(foreground=color[3], padding=2),
-                widget.CurrentLayoutIcon(scale=0.65, forground=color[0], bakground=color[1]),
-                widget.sep.Sep(foreground=color[3], padding=3),
+                widget.sep.Sep(foreground=color[3],
+                               padding=2,
+                               ),
+                widget.CurrentLayoutIcon(
+                    scale=0.65,
+                    forground=color[0],
+                    bakground=color[1],
+                ),
+                widget.sep.Sep(foreground=color[3],
+                               padding=3,
+                               ),
 
             ],
-            22,background='#2f3640', opacity=0.9,
+            20,
+            background='#2f3640',
+            opacity=0.9,
         ),
     ),
 ]
@@ -272,16 +331,17 @@ auto_fullscreen = True
 focus_on_window_activation = "smart"
 
 # Launch when startup
-@hook.subscribe.startup_once
 
+
+@hook.subscribe.startup_once
 def start_once():
 
     home = os.path.expanduser('~')
 
     subprocess.call([home + '/.config/qtile/autostart.sh'])
 
-@hook.subscribe.client_new
 
+@hook.subscribe.client_new
 def floating(window):
 
     floating_types = ['notification', 'toolbar', 'splash', 'dialog']
@@ -291,9 +351,6 @@ def floating(window):
     if window.window.get_wm_type() in floating_types or transient:
 
         window.floating = True
-
-
-
 
 
 # XXX: Gasp! We're lying here. In fact, nobody really uses or cares about this
