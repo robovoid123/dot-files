@@ -58,6 +58,7 @@ alias q="exit"
 
 #alias
 alias update="source ~/.zshrc"
+alias brimg="python3 /home/robovoid/Codes/learning-python/basic-scripts/wallpaper_bulk_rename.py"
 alias usage="du -h -d1"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias R="ranger"

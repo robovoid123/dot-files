@@ -112,6 +112,7 @@ vnoremap jk <esc>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
+
 inoremap <esc> <nop>
 
 noremap <C-z> :lclose<cr>

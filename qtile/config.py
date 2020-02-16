@@ -37,20 +37,30 @@ except ImportError:
     pass
 
 # Constants
+# window key
 mod = "mod4"
 terminal = "alacritty"
 
 
 # Keybindings
+# Resize window
 keys = [
-    Key([mod], "h", lazy.layout.shrink_main()),
-    Key([mod], "l", lazy.layout.grow_main()),
+    Key([mod, "shift"], "h",
+        lazy.layout.shrink_main(),
+        ),
+    Key([mod, "shift"], "l",
+        lazy.layout.grow_main(),
+        ),
 
     # Switch between windows in current stack pane
+    Key([mod], "h", lazy.layout.left()),
+    Key([mod], "l", lazy.layout.right()),
     Key([mod], "k", lazy.layout.down()),
     Key([mod], "j", lazy.layout.up()),
 
     # Move windows up or down in current stack
+    Key([mod, "control"], "h", lazy.layout.swap_left()),
+    Key([mod, "control"], "l", lazy.layout.swap_right()),
     Key([mod, "control"], "k", lazy.layout.shuffle_down()),
     Key([mod, "control"], "j", lazy.layout.shuffle_up()),
 
@@ -76,13 +86,9 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 
-    # resize window
-    Key([mod, "control"], "l", lazy.layout.increase_ratio()),
-    Key([mod, "control"], "h", lazy.layout.decrease_ratio()),
 
     # bindings for everyday stuffs
     Key([mod], "b", lazy.spawn("brave-browser")),
-
     Key([mod, "control"], "p", lazy.spawn("poweroff")),
 
     Key([mod], "t", lazy.spawn(terminal + " -e htop")),
@@ -129,6 +135,19 @@ keys = [
         lazy.spawn("light -A 5")
     ),
 ]
+
+
+color = ['#7f8fa6', '#c23616', '#dcdde1', '#2f3640']
+# Working on this right now
+colorscheme = {
+                'main_bar': '#2f3640',
+                'font': '#7f8fa6',
+                'border_normal': '#7f8fa6',
+                'border_focus': "#0097e6",
+                'group_highlight': '#273c75',
+                'group_focus': '#dcdde1',
+                'group_unfocus': '#7f8fa6',
+            }
 
 
 def init_group_names():
@@ -185,16 +204,12 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
-color = ['#7f8fa6', '#c23616', '#dcdde1', '#2f3640']
 screens = [
     Screen(
         top=bar.Bar(
             [
-                # fedora logo
-                widget.TextBox(text='', fontsize=25,
-                               foreground=color[0], padding=9,),
-
                 widget.sep.Sep(foreground=color[3], padding=3,),
+
 
                 widget.GroupBox(
                     margin_x=2,
@@ -223,11 +238,14 @@ screens = [
                                padding=100,
                                ),
 
+
                 widget.CheckUpdates(foreground=color[0],
                                     font='Ubuntu',
                                     distro='Fedora',
                                     colour_no_updates=color[0],
                                     colour_have_updates=color[0],
+                                    display_format='U: {updates}',
+                                    execute="sudo dnf upgrade",
                                     ),
 
                 widget.sep.Sep(foreground=color[3],
