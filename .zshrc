@@ -59,10 +59,13 @@ alias q="exit"
 #alias
 alias update="source ~/.zshrc"
 alias brimg="python3 /home/robovoid/Codes/learning-python/basic-scripts/wallpaper_bulk_rename.py"
+alias telegram="~/Stuffs/Telegram/Telegram"
+alias telegram-update="~/Stuffs/Telegram/Updater"
 alias usage="du -h -d1"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias R="ranger"
 alias vim=nvim
+alias qt5tools="/usr/lib64/qt5/bin/designer"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
