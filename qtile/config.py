@@ -40,7 +40,8 @@ except ImportError:
 # window key
 mod = "mod4"
 terminal = "alacritty"
-
+demenu1 = "dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb '#3f3640' "
+demenu2 = "-nf '#ffffff' -sb '#273c75' -sf '#dcdde1' -p 'dmenu:'"
 
 # Keybindings
 # Resize window
@@ -55,8 +56,8 @@ keys = [
     # Switch between windows in current stack pane
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
-    Key([mod], "k", lazy.layout.down()),
-    Key([mod], "j", lazy.layout.up()),
+    Key([mod], "j", lazy.layout.down()),
+    Key([mod], "k", lazy.layout.up()),
 
     # Move windows up or down in current stack
     Key([mod, "control"], "h", lazy.layout.swap_left()),
@@ -89,13 +90,16 @@ keys = [
 
     # bindings for everyday stuffs
     Key([mod], "b", lazy.spawn("brave-browser")),
+    Key([mod], "g",
+        lazy.spawn("/home/robovoid/Stuffs/Telegram/Telegram")),
     Key([mod, "control"], "p", lazy.spawn("poweroff")),
 
     Key([mod], "t", lazy.spawn(terminal + " -e htop")),
     # This one is for sound
     Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
     # This is terminal filemanager
-    Key([mod], "m", lazy.spawn(terminal + " -e ranger")),
+    Key([mod], "f", lazy.spawn(terminal + " -e ranger")),
+    Key([mod], "q", lazy.spawn(terminal + " -e /usr/lib64/qt5/bin/designer")),
     # Open this file
     Key([mod],
         "o",
@@ -103,9 +107,10 @@ keys = [
                    " -e nvim /home/robovoid/.config/qtile/config.py")),
 
     # Dmenu stuffs
-    Key([mod, "control"], "Return",
+
+    Key([mod], "m",
         lazy.spawn(
-            "dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb '#2f3640' -nf '#ffffff' -sb '#273c75' -sf '#dcdde1' -p 'dmenu:'")
+            demenu1 + demenu2)
         ),
 
 
@@ -136,8 +141,8 @@ keys = [
     ),
 ]
 
-
-color = ['#7f8fa6', '#c23616', '#dcdde1', '#2f3640']
+#       font/active  inactive
+color = ['#a29bfe', '#718093', '#dcdde1', '#2f3640']
 # Working on this right now
 colorscheme = {
                 'main_bar': '#2f3640',
@@ -198,10 +203,17 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='Ubuntu',
-    fontsize=12,
+    font='mononoki Nerd Font Mono Regular',
+    fontsize=13,
     padding=3,
 )
+
+icon_defaults = dict(
+    font='mononoki Nerd Font Mono Regular',
+    fontsize=20,
+    foreground=color[0],
+)
+
 extension_defaults = widget_defaults.copy()
 
 screens = [
@@ -215,24 +227,22 @@ screens = [
                     margin_x=2,
                     margin_y=1,
                     padding_x=8,
-                    fontsize=20,
+                    **icon_defaults,
                     borderwidth=2,
-                    active=color[2],
-                    inactive=color[0],
+                    active=color[0],
+                    inactive=color[1],
                     highlight_method='line',
                     # group color
-                    highlight_color=['#273c75', '#273c75'],
+                    highlight_color=['#30336b', '#30336b'],
                     spacing=0,
-                    this_current_screen_border=color[2],
-                    this_screen_border='#718093',
+                    this_current_screen_border=color[0],
+                    this_screen_border=color[0],
                 ),
 
                 widget.sep.Sep(foreground=color[3], padding=100,),
                 widget.WindowName(
+                    **widget_defaults,
                     foreground=color[0],
-                    font='Ubuntu',
-                    margin=3,
-                    fontsize=12,
                 ),
                 widget.sep.Sep(foreground=color[3],
                                padding=100,
@@ -240,12 +250,11 @@ screens = [
 
 
                 widget.CheckUpdates(foreground=color[0],
-                                    font='Ubuntu',
-                                    distro='Fedora',
                                     colour_no_updates=color[0],
                                     colour_have_updates=color[0],
+                                    **widget_defaults,
+                                    distro='Fedora',
                                     display_format='U: {updates}',
-                                    execute="sudo dnf upgrade",
                                     ),
 
                 widget.sep.Sep(foreground=color[3],
@@ -253,13 +262,16 @@ screens = [
                                ),
                 widget.Net(interface='wlp4s0',
                            foreground=color[0],
+                           **widget_defaults,
                            ),
                 widget.sep.Sep(foreground=color[3],
                                padding=6,
                                ),
 
-                widget.Battery(foreground=color[0],
+                widget.Battery(
                                update_interval=10,
+                               **widget_defaults,
+                               foreground=color[0],
                                format='{char} {percent:1.0%}',
                                charge_char=u'▲',
                                discharge_char=u'▼',
@@ -274,12 +286,12 @@ screens = [
                                ),
 
                 widget.TextBox(text='',
-                               fontsize=20,
-                               foreground=color[0],
+                               **icon_defaults,
                                ),
-                widget.Volume(fontsize=13,
-                              update_interval=0.0,
+                widget.Volume(
+                              **widget_defaults,
                               foreground=color[0],
+                              update_interval=0.0,
                               ),
 
                 widget.sep.Sep(foreground=color[3],
@@ -287,11 +299,11 @@ screens = [
                                ),
 
                 widget.TextBox(text='',
-                               fontsize=20,
-                               foreground=color[0],
+                               **icon_defaults,
                                ),
                 widget.Clock(format='%d/%m/%Y %H:%M',
                              foreground=color[0],
+                             **widget_defaults,
                              ),
 
                 widget.sep.Sep(foreground=color[3],
@@ -299,7 +311,6 @@ screens = [
                                ),
                 widget.CurrentLayoutIcon(
                     scale=0.65,
-                    forground=color[0],
                     bakground=color[1],
                 ),
                 widget.sep.Sep(foreground=color[3],
@@ -309,7 +320,7 @@ screens = [
             ],
             20,
             background='#2f3640',
-            opacity=0.9,
+            opacity=0.90,
         ),
     ),
 ]
