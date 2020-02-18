@@ -40,8 +40,22 @@ except ImportError:
 # window key
 mod = "mod4"
 terminal = "alacritty"
-demenu1 = "dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb '#3f3640' "
-demenu2 = "-nf '#ffffff' -sb '#273c75' -sf '#dcdde1' -p 'dmenu:'"
+
+#       font/active  inactive  #2f3640    bar-background
+color = ['#a29bfe', '#718093', '#dcdde1', '#2f3640']
+# Working on this right now
+colorscheme = {
+                'main_bar': '#2f3640',
+                'font': '#7f8fa6',
+                'border_normal': '#7f8fa6',
+                'border_focus': "#0097e6",
+                'group_highlight': '#273c75',
+                'group_focus': '#dcdde1',
+                'group_unfocus': '#7f8fa6',
+            }
+
+demenu1 = f"dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb {color[3]} "
+demenu2 = f"-nf {color[0]} -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
 
 # Keybindings
 # Resize window
@@ -141,19 +155,6 @@ keys = [
     ),
 ]
 
-#       font/active  inactive
-color = ['#a29bfe', '#718093', '#dcdde1', '#2f3640']
-# Working on this right now
-colorscheme = {
-                'main_bar': '#2f3640',
-                'font': '#7f8fa6',
-                'border_normal': '#7f8fa6',
-                'border_focus': "#0097e6",
-                'group_highlight': '#273c75',
-                'group_focus': '#dcdde1',
-                'group_unfocus': '#7f8fa6',
-            }
-
 
 def init_group_names():
     return [("", {'layout': 'monadtall'}),
@@ -188,8 +189,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 border_defaults = dict(
     border_normal=('#7f8fa6'),
     border_focus=("#0097e6"),
-    border_width=2,
-    margin=2,
+    border_width=1,
+    margin=6,
 )
 
 layouts = [
@@ -277,6 +278,7 @@ screens = [
                                discharge_char=u'▼',
                                ),
 
+                widget.Cmus(),
                 widget.sep.Sep(foreground=color[3],
                                padding=2,
                                ),
@@ -309,9 +311,8 @@ screens = [
                 widget.sep.Sep(foreground=color[3],
                                padding=2,
                                ),
-                widget.CurrentLayoutIcon(
-                    scale=0.65,
-                    bakground=color[1],
+                widget.CurrentLayout(
+                    foreground=color[0],
                 ),
                 widget.sep.Sep(foreground=color[3],
                                padding=3,
