@@ -98,7 +98,7 @@ keys = [
     Key([mod], "w", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.shutdown()),
+    Key([mod, "control"], "q", lazy.spawn("xfce4-session-logout")),
     Key([mod], "r", lazy.spawncmd()),
 
 
@@ -113,7 +113,7 @@ keys = [
     Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
     # This is terminal filemanager
     Key([mod], "f", lazy.spawn(terminal + " -e ranger")),
-    Key([mod], "q", lazy.spawn(terminal + " -e /usr/lib64/qt5/bin/designer")),
+    Key([mod], "q", lazy.spawn("xfce4-appfinder")),
     # Open this file
     Key([mod],
         "o",
@@ -218,111 +218,112 @@ icon_defaults = dict(
 extension_defaults = widget_defaults.copy()
 
 screens = [
+
     Screen(
-        top=bar.Bar(
-            [
-                widget.sep.Sep(foreground=color[3], padding=3,),
+       top=bar.Bar(
+           [
+               widget.sep.Sep(foreground=color[3], padding=3,),
 
 
-                widget.GroupBox(
-                    margin_x=2,
-                    margin_y=1,
-                    padding_x=8,
-                    **icon_defaults,
-                    borderwidth=2,
-                    active=color[0],
-                    inactive=color[1],
-                    highlight_method='line',
-                    # group color
-                    highlight_color=['#30336b', '#30336b'],
-                    spacing=0,
-                    this_current_screen_border=color[0],
-                    this_screen_border=color[0],
-                ),
+               widget.GroupBox(
+                   margin_x=2,
+                   margin_y=1,
+                   padding_x=8,
+                   **icon_defaults,
+                   borderwidth=2,
+                   active=color[0],
+                   inactive=color[1],
+                   highlight_method='line',
+                   # group color
+                   highlight_color=['#30336b', '#30336b'],
+                   spacing=0,
+                   this_current_screen_border=color[0],
+                   this_screen_border=color[0],
+               ),
 
-                widget.sep.Sep(foreground=color[3], padding=100,),
-                widget.WindowName(
-                    **widget_defaults,
-                    foreground=color[0],
-                ),
-                widget.sep.Sep(foreground=color[3],
-                               padding=100,
-                               ),
-
-
-                widget.CheckUpdates(foreground=color[0],
-                                    colour_no_updates=color[0],
-                                    colour_have_updates=color[0],
-                                    **widget_defaults,
-                                    distro='Fedora',
-                                    display_format='U: {updates}',
-                                    ),
-
-                widget.sep.Sep(foreground=color[3],
-                               padding=4,
-                               ),
-                widget.Net(interface='wlp4s0',
-                           foreground=color[0],
-                           **widget_defaults,
-                           ),
-                widget.sep.Sep(foreground=color[3],
-                               padding=6,
-                               ),
-
-                widget.Battery(
-                               update_interval=10,
-                               **widget_defaults,
-                               foreground=color[0],
-                               format='{char} {percent:1.0%}',
-                               charge_char=u'▲',
-                               discharge_char=u'▼',
-                               ),
-
-                widget.Cmus(),
-                widget.sep.Sep(foreground=color[3],
-                               padding=2,
-                               ),
-                widget.Systray(),
-                widget.sep.Sep(foreground=color[3],
-                               padding=2,
-                               ),
-
-                widget.TextBox(text='',
-                               **icon_defaults,
-                               ),
-                widget.Volume(
-                              **widget_defaults,
-                              foreground=color[0],
-                              update_interval=0.0,
+               widget.sep.Sep(foreground=color[3], padding=100,),
+               widget.WindowName(
+                   **widget_defaults,
+                   foreground=color[0],
+               ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=100,
                               ),
 
-                widget.sep.Sep(foreground=color[3],
-                               padding=3,
-                               ),
 
-                widget.TextBox(text='',
-                               **icon_defaults,
-                               ),
-                widget.Clock(format='%d/%m/%Y %H:%M',
-                             foreground=color[0],
+               widget.CheckUpdates(foreground=color[0],
+                                   colour_no_updates=color[0],
+                                   colour_have_updates=color[0],
+                                   **widget_defaults,
+                                   distro='Fedora',
+                                   display_format='U: {updates}',
+                                   ),
+
+               widget.sep.Sep(foreground=color[3],
+                              padding=4,
+                              ),
+               widget.Net(interface='wlp4s0',
+                          foreground=color[0],
+                          **widget_defaults,
+                          ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=6,
+                              ),
+
+               widget.Battery(
+                              update_interval=10,
+                              **widget_defaults,
+                              foreground=color[0],
+                              format='{char} {percent:1.0%}',
+                              charge_char=u'▲',
+                              discharge_char=u'▼',
+                              ),
+
+               widget.Cmus(),
+               widget.sep.Sep(foreground=color[3],
+                              padding=2,
+                              ),
+               widget.Systray(),
+               widget.sep.Sep(foreground=color[3],
+                              padding=2,
+                              ),
+
+               widget.TextBox(text='',
+                              **icon_defaults,
+                              ),
+               widget.Volume(
                              **widget_defaults,
+                             foreground=color[0],
+                             update_interval=0.0,
                              ),
 
-                widget.sep.Sep(foreground=color[3],
-                               padding=2,
-                               ),
-                widget.CurrentLayout(
-                    foreground=color[0],
-                ),
-                widget.sep.Sep(foreground=color[3],
-                               padding=3,
-                               ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=3,
+                              ),
 
-            ],
-            20,
-            background='#2f3640',
-            opacity=0.90,
-        ),
+               widget.TextBox(text='',
+                              **icon_defaults,
+                              ),
+               widget.Clock(format='%d/%m/%Y %H:%M',
+                            foreground=color[0],
+                            **widget_defaults,
+                            ),
+
+               widget.sep.Sep(foreground=color[3],
+                              padding=2,
+                              ),
+               widget.CurrentLayout(
+                   foreground=color[0],
+               ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=3,
+                              ),
+
+           ],
+           20,
+           background='#2f3640',
+           opacity=0.90,
+       ),
     ),
 ]
 

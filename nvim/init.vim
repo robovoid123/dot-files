@@ -1,3 +1,4 @@
+" mapping leader current is space
 let mapleader=" "
 
 " Basic stuff
@@ -46,31 +47,48 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set textwidth=79
     \ set expandtab
     \ set autoindent
-    \ set fileformat=unix
-
+    \ set fileformat=unix 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
+    " vscode ctr p feature
     Plug 'ctrlpvim/ctrlp.vim'
+
+    " tag completion and rename
+    Plug 'alvan/vim-closetag'
+    Plug 'AndrewRadev/tagalong.vim'
 
     Plug 'vim-scripts/indentpython.vim'
 
+    " code suggestion
     Plug 'valloric/youcompleteme'
 
+    " airline stuff
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
 
     Plug 'ryanoasis/vim-devicons'
 
+    " surround feature
     Plug 'tpope/vim-surround'
-
+    
+    " Commenting
+    Plug 'tpope/vim-commentary'
+    
+    " show indent
     Plug 'yggdroot/indentline'
-
-    Plug 'scrooloose/nerdcommenter'
+    
+    " nerd tree stuff
+    Plug 'xuyuanp/nerdtree-git-plugin'
     Plug 'scrooloose/nerdtree'
-    Plug 'scrooloose/syntastic'
+    Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
+    " check errors
+    Plug 'scrooloose/syntastic'
 call plug#end()
+
+" Enable spell checking, s for spell check
+    map <leader>s :setlocal spell! spelllang=en_au<CR>
 
 " Uncomment to autostart the NERDTree
 " autocmd vimenter * NERDTree
@@ -89,10 +107,10 @@ call plug#end()
 
     let g:syntastic_always_populate_loc_list = 1
     let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 1
+    let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
 
-    " Airline config
+" Airline config
     let g:rehash256 = 1
     let g:Powerline_symbols='unicode'
     let g:Powerline_theme='long'
@@ -104,7 +122,8 @@ call plug#end()
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
-    let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+    "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+    let g:indentLine_char_list = ['➜']
 
 " Keybindings
 inoremap jk <esc>
@@ -115,16 +134,16 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
 
 inoremap <esc> <nop>
 
+" syntastic error close
 noremap <C-z> :lclose<cr>
 
-
-"Disable arrow keys in Normal mode
+" Disable arrow keys in Normal mode
     no <Up> <Nop>
     no <Down> <Nop>
     no <Left> <Nop>
     no <Right> <Nop>
 
-"Disable arrow keys in Insert mode
+" Disable arrow keys in Insert mode
     ino <Up> <Nop>
     ino <Down> <Nop>
     ino <Left> <Nop>
@@ -135,7 +154,5 @@ noremap <C-z> :lclose<cr>
     map <C-j> <C-w>j
     map <C-k> <C-w>k
     map <C-l> <C-w>l
-
-
 
 
