@@ -32,22 +32,6 @@ hi CursorLineNr ctermfg=15
 hi VertSplit ctermfg=8 ctermbg=0
 hi Statement ctermfg=3
 
-
-" Fix indentation
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
-
-" Python Stuffs
-"au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
 
@@ -155,4 +139,25 @@ noremap <C-z> :lclose<cr>
     map <C-k> <C-w>k
     map <C-l> <C-w>l
 
+" Uppercase the current word
+inoremap <C-u> <esc>viwUi
+nnoremap <C-u> viwU<esc>
+
+" Delete current line
+inoremap <C-d> <esc>ddi
+nnoremap <C-d> dd<esc>
+
+" Saving file
+nnoremap <leader>w :w
+nnoremap <leader>q :q
+nnoremap <leader>wq :wq
+
+" Python Stuff
+augroup pythonstuff:
+    autocmd!
+    autocmd Filetype python inoremap ;in def __init__(self<#>):<esc>/<#><ENTER>cf>
+    autocmd Filetype python inoremap ;if if <#>:<esc>/<#><ENTER>cf>
+    autocmd Filetype python inoremap ;el elif <#>:<esc>/<#><ENTER>cf>
+    autocmd Filetype python inoremap ;p print(<#>)<esc>/<#><ENTER>cf>
+    autocmd Filetype python inoremap ;q quit()
 

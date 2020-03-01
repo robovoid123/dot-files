@@ -60,10 +60,10 @@ demenu2 = f"-nf {color[0]} -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
 # Keybindings
 # Resize window
 keys = [
-    Key([mod, "shift"], "h",
+    Key([mod, "control"], "h",
         lazy.layout.shrink_main(),
         ),
-    Key([mod, "shift"], "l",
+    Key([mod, "control"], "l",
         lazy.layout.grow_main(),
         ),
 
@@ -74,10 +74,10 @@ keys = [
     Key([mod], "k", lazy.layout.up()),
 
     # Move windows up or down in current stack
-    Key([mod, "control"], "h", lazy.layout.swap_left()),
-    Key([mod, "control"], "l", lazy.layout.swap_right()),
-    Key([mod, "control"], "k", lazy.layout.shuffle_down()),
-    Key([mod, "control"], "j", lazy.layout.shuffle_up()),
+    Key([mod, "shift"], "h", lazy.layout.swap_left()),
+    Key([mod, "shift"], "l", lazy.layout.swap_right()),
+    Key([mod, "shift"], "j", lazy.layout.shuffle_down()),
+    Key([mod, "shift"], "k", lazy.layout.shuffle_up()),
 
     # Switch window focus to other pane(s) of stack
     Key([mod], "space", lazy.layout.next()),
@@ -106,7 +106,7 @@ keys = [
     Key([mod], "b", lazy.spawn("brave-browser")),
     Key([mod], "g",
         lazy.spawn("/home/robovoid/Stuffs/Telegram/Telegram")),
-    Key([mod, "control"], "p", lazy.spawn("poweroff")),
+    Key([mod, "control"], "p", lazy.spawn("/home/robovoid/shutdown.sh")),
 
     Key([mod], "t", lazy.spawn(terminal + " -e htop")),
     # This one is for sound
@@ -114,11 +114,6 @@ keys = [
     # This is terminal filemanager
     Key([mod], "f", lazy.spawn(terminal + " -e ranger")),
     Key([mod], "q", lazy.spawn("xfce4-appfinder")),
-    # Open this file
-    Key([mod],
-        "o",
-        lazy.spawn(terminal +
-                   " -e nvim /home/robovoid/.config/qtile/config.py")),
 
     # Dmenu stuffs
 
@@ -127,7 +122,8 @@ keys = [
             demenu1 + demenu2)
         ),
 
-
+    Key([mod], "c", lazy.spawn(terminal + " -e /home/robovoid/list.sh")),
+    Key([mod, "shift"], "b", lazy.spawn("/home/robovoid/bookmarking.sh")),
 
     # Change the volume if your keyboard has special volume keys.
     Key(
@@ -283,7 +279,6 @@ screens = [
                widget.sep.Sep(foreground=color[3],
                               padding=2,
                               ),
-               widget.Systray(),
                widget.sep.Sep(foreground=color[3],
                               padding=2,
                               ),
@@ -304,7 +299,7 @@ screens = [
                widget.TextBox(text='',
                               **icon_defaults,
                               ),
-               widget.Clock(format='%d/%m/%Y %H:%M',
+               widget.Clock(format='%a,%d,%b,%X',
                             foreground=color[0],
                             **widget_defaults,
                             ),
@@ -316,13 +311,17 @@ screens = [
                    foreground=color[0],
                ),
                widget.sep.Sep(foreground=color[3],
-                              padding=3,
+                              padding=2,
+                              ),
+               widget.Systray(),
+               widget.sep.Sep(foreground=color[3],
+                              padding=4,
                               ),
 
            ],
            20,
            background='#2f3640',
-           opacity=0.90,
+           opacity=0.95,
        ),
     ),
 ]
