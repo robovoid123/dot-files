@@ -1,4 +1,4 @@
-fortune | cowsay | lolcat
+neofetch
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -37,9 +37,10 @@ bindkey -v '^?' backward-delete-char
 plugins=(
 	git
 	zsh-autosuggestions
-	dnf
+    zsh-syntax-highlighting
 	sudo
 	vi-mode
+    python
 	pip
 	pipenv
 	zsh-z
@@ -47,7 +48,6 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
-source ~/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # User configuration
 
 # set default editor to nvim
@@ -67,6 +67,7 @@ alias usage="du -h -d1"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias R="ranger"
 alias vim=nvim
+alias vi=nvim
 alias qt5tools="/usr/lib64/qt5/bin/designer"
 alias joplin="~/.joplin/Joplin.AppImage"
 

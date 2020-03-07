@@ -69,6 +69,7 @@ call plug#begin('~/.vim/plugged')
 
     " check errors
     Plug 'scrooloose/syntastic'
+
 call plug#end()
 
 " Enable spell checking, s for spell check
@@ -160,4 +161,7 @@ augroup pythonstuff:
     autocmd Filetype python inoremap ;el elif <#>:<esc>/<#><ENTER>cf>
     autocmd Filetype python inoremap ;p print(<#>)<esc>/<#><ENTER>cf>
     autocmd Filetype python inoremap ;q quit()
+    autocmd Filetype python inoremap { {}<esc>i
+    autocmd Filetype python inoremap [ []<esc>i
+    autocmd Filetype python inoremap ( ()<esc>i
 

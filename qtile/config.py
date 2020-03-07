@@ -54,7 +54,7 @@ colorscheme = {
                 'group_unfocus': '#7f8fa6',
             }
 
-demenu1 = f"dmenu_run -fn 'UbuntuMono Nerd Font:size=10' -nb {color[3]} "
+demenu1 = f"dmenu_run -fn 'JetBrains Mono Nerd Font Complete Mono:size=10' -nb {color[3]} "
 demenu2 = f"-nf {color[0]} -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
 
 # Keybindings
@@ -98,14 +98,14 @@ keys = [
     Key([mod], "w", lazy.window.kill()),
 
     Key([mod, "control"], "r", lazy.restart()),
-    Key([mod, "control"], "q", lazy.spawn("xfce4-session-logout")),
+    Key([mod, "control"], "q", lazy.shutdown()),
     Key([mod], "r", lazy.spawncmd()),
 
 
     # bindings for everyday stuffs
-    Key([mod], "b", lazy.spawn("brave-browser")),
+    Key([mod], "b", lazy.spawn("brave")),
     Key([mod], "g",
-        lazy.spawn("/home/robovoid/Stuffs/Telegram/Telegram")),
+        lazy.spawn("telegram-desktop")),
     Key([mod, "control"], "p", lazy.spawn("/home/robovoid/shutdown.sh")),
 
     Key([mod], "t", lazy.spawn(terminal + " -e htop")),
@@ -113,8 +113,7 @@ keys = [
     Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
     # This is terminal filemanager
     Key([mod], "f", lazy.spawn(terminal + " -e ranger")),
-    Key([mod], "q", lazy.spawn("xfce4-appfinder")),
-
+    Key([mod, "control"], "p", lazy.spawn("/home/robovoid/shutdown.sh")),
     # Dmenu stuffs
 
     Key([mod], "m",
@@ -123,31 +122,30 @@ keys = [
         ),
 
     Key([mod], "c", lazy.spawn(terminal + " -e /home/robovoid/list.sh")),
-    Key([mod, "shift"], "b", lazy.spawn("/home/robovoid/bookmarking.sh")),
 
     # Change the volume if your keyboard has special volume keys.
     Key(
         [], "XF86AudioRaiseVolume",
-        lazy.spawn("amixer -c 0 set Master 1+ unmute")
+        lazy.spawn("/home/robovoid/changevolume.sh 1+")
     ),
     Key(
         [], "XF86AudioLowerVolume",
-        lazy.spawn("amixer -c 0 set Master 1- unmute")
+        lazy.spawn("/home/robovoid/changevolume.sh 1-")
     ),
     # toggle sound
     Key(
         [], "XF86AudioMute",
-        lazy.spawn("amixer -q set Master toggle")
+        lazy.spawn("/home/robovoid/changevolume.sh toggle")
     ),
     # Change brightness
     # dependency : light
     Key(
         [], "XF86MonBrightnessDown",
-        lazy.spawn("light -U 5")
+        lazy.spawn("/home/robovoid/changebrightness.sh -U 5")
     ),
     Key(
         [], "XF86MonBrightnessUp",
-        lazy.spawn("light -A 5")
+        lazy.spawn("/home/robovoid/changebrightness.sh -A 5")
     ),
 ]
 
@@ -155,7 +153,7 @@ keys = [
 def init_group_names():
     return [("", {'layout': 'monadtall'}),
             ("", {'layout': 'monadtall'}),
-            ("", {'layout': 'monadtall'}),
+            ("", {'layout': 'max'}),
             ("", {'layout': 'monadtall'}),
             ("", {'layout': 'monadtall'}),
             ("", {'layout': 'monadtall'}),
@@ -200,14 +198,14 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='mononoki Nerd Font Mono Regular',
+    font='JetBrains Mono Nerd Font Mono',
     fontsize=13,
-    padding=3,
+    padding=1,
 )
 
 icon_defaults = dict(
-    font='mononoki Nerd Font Mono Regular',
-    fontsize=20,
+    font='JetBrains Mono Nerd Font Mono',
+    fontsize=19,
     foreground=color[0],
 )
 
@@ -224,7 +222,7 @@ screens = [
                widget.GroupBox(
                    margin_x=2,
                    margin_y=1,
-                   padding_x=8,
+                   padding_x=12,
                    **icon_defaults,
                    borderwidth=2,
                    active=color[0],
@@ -246,15 +244,6 @@ screens = [
                               padding=100,
                               ),
 
-
-               widget.CheckUpdates(foreground=color[0],
-                                   colour_no_updates=color[0],
-                                   colour_have_updates=color[0],
-                                   **widget_defaults,
-                                   distro='Fedora',
-                                   display_format='U: {updates}',
-                                   ),
-
                widget.sep.Sep(foreground=color[3],
                               padding=4,
                               ),
@@ -267,37 +256,15 @@ screens = [
                               ),
 
                widget.Battery(
-                              update_interval=10,
+                              update_interval=60,
                               **widget_defaults,
                               foreground=color[0],
                               format='{char} {percent:1.0%}',
                               charge_char=u'▲',
                               discharge_char=u'▼',
                               ),
-
-               widget.Cmus(),
                widget.sep.Sep(foreground=color[3],
-                              padding=2,
-                              ),
-               widget.sep.Sep(foreground=color[3],
-                              padding=2,
-                              ),
-
-               widget.TextBox(text='',
-                              **icon_defaults,
-                              ),
-               widget.Volume(
-                             **widget_defaults,
-                             foreground=color[0],
-                             update_interval=0.0,
-                             ),
-
-               widget.sep.Sep(foreground=color[3],
-                              padding=3,
-                              ),
-
-               widget.TextBox(text='',
-                              **icon_defaults,
+                              padding=4,
                               ),
                widget.Clock(format='%a,%d,%b,%X',
                             foreground=color[0],
@@ -319,9 +286,9 @@ screens = [
                               ),
 
            ],
-           20,
+           22,
            background='#2f3640',
-           opacity=0.95,
+           opacity=0.80,
        ),
     ),
 ]
@@ -360,15 +327,13 @@ floating_layout = layout.Floating(float_rules=[
 auto_fullscreen = True
 focus_on_window_activation = "smart"
 
-# Launch when startup
-
-
 @hook.subscribe.startup_once
 def start_once():
 
     home = os.path.expanduser('~')
 
     subprocess.call([home + '/.config/qtile/autostart.sh'])
+
 
 
 @hook.subscribe.client_new
