@@ -54,8 +54,8 @@ colorscheme = {
                 'group_unfocus': '#7f8fa6',
             }
 
-demenu1 = f"dmenu_run -fn 'JetBrains Mono Nerd Font Complete Mono:size=10' -nb {color[3]} "
-demenu2 = f"-nf {color[0]} -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
+demenu1 = f"dmenu_run -fn 'JetBrains Mono Nerd Font:size=10' -h 22 -nb {color[3]} "
+demenu2 = f"-nf '#a29bfe' -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
 
 # Keybindings
 # Resize window
@@ -103,7 +103,7 @@ keys = [
 
 
     # bindings for everyday stuffs
-    Key([mod], "b", lazy.spawn("brave")),
+    Key([mod], "b", lazy.spawn("firefox")),
     Key([mod], "g",
         lazy.spawn("telegram-desktop")),
     Key([mod, "control"], "p", lazy.spawn("/home/robovoid/shutdown.sh")),
@@ -113,7 +113,7 @@ keys = [
     Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
     # This is terminal filemanager
     Key([mod], "f", lazy.spawn(terminal + " -e ranger")),
-    Key([mod, "control"], "p", lazy.spawn("/home/robovoid/shutdown.sh")),
+    Key([mod, "control"], "p", lazy.spawn("/home/robovoid/scripts/shutdown.sh")),
     # Dmenu stuffs
 
     Key([mod], "m",
@@ -121,31 +121,31 @@ keys = [
             demenu1 + demenu2)
         ),
 
-    Key([mod], "c", lazy.spawn(terminal + " -e /home/robovoid/list.sh")),
+    Key([mod], "c", lazy.spawn(terminal + " -e /home/robovoid/scripts/list.sh")),
 
     # Change the volume if your keyboard has special volume keys.
     Key(
         [], "XF86AudioRaiseVolume",
-        lazy.spawn("/home/robovoid/changevolume.sh 1+")
+        lazy.spawn("/home/robovoid/scripts/changevolume.sh 1+")
     ),
     Key(
         [], "XF86AudioLowerVolume",
-        lazy.spawn("/home/robovoid/changevolume.sh 1-")
+        lazy.spawn("/home/robovoid/scripts/changevolume.sh 1-")
     ),
     # toggle sound
     Key(
         [], "XF86AudioMute",
-        lazy.spawn("/home/robovoid/changevolume.sh toggle")
+        lazy.spawn("/home/robovoid/scripts/changevolume.sh toggle")
     ),
     # Change brightness
     # dependency : light
     Key(
         [], "XF86MonBrightnessDown",
-        lazy.spawn("/home/robovoid/changebrightness.sh -U 5")
+        lazy.spawn("/home/robovoid/scripts/changebrightness.sh -U 5")
     ),
     Key(
         [], "XF86MonBrightnessUp",
-        lazy.spawn("/home/robovoid/changebrightness.sh -A 5")
+        lazy.spawn("/home/robovoid/scripts/changebrightness.sh -A 5")
     ),
 ]
 
@@ -183,8 +183,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 border_defaults = dict(
     border_normal=('#7f8fa6'),
     border_focus=("#0097e6"),
-    border_width=1,
-    margin=6,
+    border_width=2,
+    margin=4,
 )
 
 layouts = [
@@ -198,14 +198,14 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='JetBrains Mono Nerd Font Mono',
+    font='JetBrains Mono Nerd Font',
     fontsize=13,
     padding=1,
 )
 
 icon_defaults = dict(
-    font='JetBrains Mono Nerd Font Mono',
-    fontsize=19,
+    font='JetBrains Mono Nerd Font',
+    fontsize=14,
     foreground=color[0],
 )
 
@@ -288,7 +288,7 @@ screens = [
            ],
            22,
            background='#2f3640',
-           opacity=0.80,
+           opacity=0.85,
        ),
     ),
 ]

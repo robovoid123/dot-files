@@ -13,6 +13,9 @@ export ZSH="/home/robovoid/.oh-my-zsh"
 PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
+# path to scripts
+PATH=/home/robovoid/scripts:$PATH
+
 # colors 
 #autoload -U colors && colors
 #PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "

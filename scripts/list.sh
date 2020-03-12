@@ -10,7 +10,7 @@ addconf=/home/robovoid/list.sh
 
 choice="ranger\nqtile\nnvim\ncompton\nzsh\nalacritty\nAdd"
 
-chosen=$(echo -e "$choice" | dmenu  -i -p "choose a config: ")
+chosen=$(echo -e "$choice" | dmenu  -i -h 22 -fn 'JetBrains Mono Nerd Font:size=10' -nb '#2f3640' -nf '#a29bfe' -sb '#30336b' -sf '#dcdde1' -p "choose a config: ")
 
 case "$chosen" in
     ranger) nvim "$rc";;

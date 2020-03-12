@@ -45,6 +45,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'vim-scripts/indentpython.vim'
 
     " code suggestion
+    Plug 'kien/ctrlp.vim'
     Plug 'valloric/youcompleteme'
 
     " airline stuff
@@ -55,6 +56,9 @@ call plug#begin('~/.vim/plugged')
 
     " surround feature
     Plug 'tpope/vim-surround'
+
+    " Auto pair brackets and stuff
+    Plug 'jiangmiao/auto-pairs'
     
     " Commenting
     Plug 'tpope/vim-commentary'
@@ -69,6 +73,9 @@ call plug#begin('~/.vim/plugged')
 
     " check errors
     Plug 'scrooloose/syntastic'
+
+    " Emmet like vscode
+    Plug 'mattn/emmet-vim'
 
 call plug#end()
 
