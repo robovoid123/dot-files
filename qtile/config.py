@@ -60,6 +60,23 @@ demenu2 = f"-nf '#a29bfe' -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
 # Keybindings
 # Resize window
 keys = [
+
+    Key([mod], "a",
+                    lazy.to_screen(0)                       # Keyboard focus to screen(0)
+                    ),
+
+    Key([mod], "s",
+                    lazy.to_screen(1)                       # Keyboard focus to screen(0)
+                    ),
+
+    ### Switch focus of monitors
+    Key([mod], "period",
+    lazy.next_screen()                      # Move monitor focus to next screen
+    ),
+    Key([mod], "comma",
+    lazy.prev_screen()                      # Move monitor focus to prev screen
+    ),
+
     Key([mod, "control"], "h",
         lazy.layout.shrink_main(),
         ),
@@ -184,7 +201,7 @@ border_defaults = dict(
     border_normal=('#7f8fa6'),
     border_focus=("#0097e6"),
     border_width=2,
-    margin=4,
+    margin=8,
 )
 
 layouts = [
@@ -210,6 +227,77 @@ icon_defaults = dict(
 )
 
 extension_defaults = widget_defaults.copy()
+
+screen_widget = [
+               widget.sep.Sep(foreground=color[3], padding=3,),
+
+               widget.GroupBox(
+                   margin_x=2,
+                   margin_y=1,
+                   padding_x=12,
+                   **icon_defaults,
+                   borderwidth=2,
+                   active=color[0],
+                   inactive=color[1],
+                   highlight_method='line',
+                   # group color
+                   highlight_color=['#30336b', '#30336b'],
+                   spacing=0,
+                   this_current_screen_border=color[0],
+                   this_screen_border=color[0],
+               ),
+
+               widget.sep.Sep(foreground=color[3], padding=100,),
+               widget.WindowName(
+                   **widget_defaults,
+                   foreground=color[0],
+               ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=100,
+                              ),
+
+               widget.sep.Sep(foreground=color[3],
+                              padding=4,
+                              ),
+               widget.Net(interface='wlp4s0',
+                          foreground=color[0],
+                          **widget_defaults,
+                          ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=6,
+                              ),
+
+               widget.Battery(
+                              update_interval=60,
+                              **widget_defaults,
+                              foreground=color[0],
+                              format='{char} {percent:1.0%}',
+                              charge_char=u'▲',
+                              discharge_char=u'▼',
+                              ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=4,
+                              ),
+               widget.Clock(format='%a,%d,%b,%X',
+                            foreground=color[0],
+                            **widget_defaults,
+                            ),
+
+               widget.sep.Sep(foreground=color[3],
+                              padding=2,
+                              ),
+               widget.CurrentLayout(
+                   foreground=color[0],
+               ),
+               widget.sep.Sep(foreground=color[3],
+                              padding=2,
+                              ),
+               widget.Systray(),
+               widget.sep.Sep(foreground=color[3],
+                              padding=4,
+                              ),
+
+           ]
 
 screens = [
 
@@ -291,6 +379,7 @@ screens = [
            opacity=0.85,
        ),
     ),
+    Screen(top=bar.Bar(widgets=screen_widget, opacity=0.85, size=27, background='#2f3640',)),
 ]
 
 # Drag floating layouts.

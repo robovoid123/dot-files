@@ -4,33 +4,8 @@ let mapleader=" "
 " Basic stuff
 filetype plugin indent on
 set nocompatible
-
-syntax on
-let python_highlight_all=1
-set number relativenumber
-set tabstop=2
-set encoding=utf-8
-
-set nohlsearch
-set nobackup
-set nowb
-set noswapfile
-
-" Use spaces instead of tabs
-set expandtab
-
-" Be smart when using tabs ;)
-set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
-
-colorscheme default
-hi LineNr ctermfg=242
-hi CursorLineNr ctermfg=15
-hi VertSplit ctermfg=8 ctermbg=0
-hi Statement ctermfg=3
+set hidden
+set termguicolors
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -38,19 +13,22 @@ call plug#begin('~/.vim/plugged')
     " vscode ctr p feature
     Plug 'ctrlpvim/ctrlp.vim'
 
+    " gruvbox colorscheme
+    Plug 'morhetz/gruvbox'
+   
+    " color preview
+    Plug 'RRethy/vim-hexokinase'
+
+    " git plugin
+    Plug 'tpope/vim-fugitive'
+
     " tag completion and rename
     Plug 'alvan/vim-closetag'
     Plug 'AndrewRadev/tagalong.vim'
 
-    Plug 'vim-scripts/indentpython.vim'
-
     " code suggestion
-    Plug 'kien/ctrlp.vim'
     Plug 'valloric/youcompleteme'
 
-    " airline stuff
-    Plug 'vim-airline/vim-airline'
-    Plug 'vim-airline/vim-airline-themes'
 
     Plug 'ryanoasis/vim-devicons'
 
@@ -76,20 +54,78 @@ call plug#begin('~/.vim/plugged')
 
     " Emmet like vscode
     Plug 'mattn/emmet-vim'
+    
+    " status bar
+    Plug 'itchyny/lightline.vim'
+    Plug 'mengelbrecht/lightline-bufferline'
+
 
 call plug#end()
+
+
+syntax on
+let python_highlight_all=1
+set number relativenumber
+set encoding=utf-8
+
+set nohlsearch
+set nobackup
+set nowb
+set noswapfile
+
+" Use spaces instead of tabs
+set expandtab
+
+" Be smart when using tabs ;)
+set smarttab
+
+" 1 tab == 4 spaces
+set shiftwidth=4
+set tabstop=4
+
+" gruvbox config
+let g:gruvbox_contrast_dark = 'hard'
+
+" lightline
+" get rid of --insert--
+set noshowmode
+let g:lightline#bufferline#show_number  = 1
+let g:lightline#bufferline#enable_devicons = 1
+let g:lightline#bufferline#unnamed= '[No Name]'
+ let g:lightline = {
+       \ 'colorscheme': 'seoul256',
+       \ 'active': {
+           \   'left': [ [ 'mode', 'paste' ],
+           \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+           \ },
+           \ 'component_function': {
+           \   'gitbranch': 'FugitiveHead'
+           \ },
+       \ }
+set showtabline=2
+let g:lightline.tabline = { 'left': [['buffers']], 'right': [['close']]}
+let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
+let g:lightline.component_type   = {'buffers': 'tabsel'}
+
+colorscheme gruvbox
 
 " Enable spell checking, s for spell check
     map <leader>s :setlocal spell! spelllang=en_au<CR>
 
+" ctrlp
+    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
+    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+    
 " Uncomment to autostart the NERDTree
 " autocmd vimenter * NERDTree
-    map <C-n> :NERDTreeToggle<CR>
+    map <C-n> :NERDTreeToggleVCS<CR>
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
     let NERDTreeShowLineNumbers=1
     let NERDTreeShowHidden=1
     let NERDTreeMinimalUI = 1
+
+    let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
 
 
 " Syntastic
@@ -102,20 +138,12 @@ call plug#end()
     let g:syntastic_check_on_open = 0
     let g:syntastic_check_on_wq = 0
 
-" Airline config
-    let g:rehash256 = 1
-    let g:Powerline_symbols='unicode'
-    let g:Powerline_theme='long'
-
-    let g:airline#extensions#tabline#enabled = 1
-    let g:airline_powerline_fonts = 1
-    let g:airline_theme='angr'
-
-
 " indent plugin stuff
     let g:indentLine_color_term = 239
     "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
     let g:indentLine_char_list = ['➜']
+
+
 
 " Keybindings
 inoremap jk <esc>
@@ -151,24 +179,12 @@ noremap <C-z> :lclose<cr>
 inoremap <C-u> <esc>viwUi
 nnoremap <C-u> viwU<esc>
 
-" Delete current line
-inoremap <C-d> <esc>ddi
-nnoremap <C-d> dd<esc>
-
-" Saving file
-nnoremap <leader>w :w
-nnoremap <leader>q :q
-nnoremap <leader>wq :wq
-
 " Python Stuff
-augroup pythonstuff:
-    autocmd!
-    autocmd Filetype python inoremap ;in def __init__(self<#>):<esc>/<#><ENTER>cf>
-    autocmd Filetype python inoremap ;if if <#>:<esc>/<#><ENTER>cf>
-    autocmd Filetype python inoremap ;el elif <#>:<esc>/<#><ENTER>cf>
-    autocmd Filetype python inoremap ;p print(<#>)<esc>/<#><ENTER>cf>
-    autocmd Filetype python inoremap ;q quit()
-    autocmd Filetype python inoremap { {}<esc>i
-    autocmd Filetype python inoremap [ []<esc>i
-    autocmd Filetype python inoremap ( ()<esc>i
-
+" augroup pythonstuff:
+"     autocmd!
+"     autocmd Filetype python inoremap ;in def __init__(self<#>):<esc>/<#><ENTER>cf>
+"     autocmd Filetype python inoremap ;if if <#>:<esc>/<#><ENTER>cf>
+"     autocmd Filetype python inoremap ;el elif <#>:<esc>/<#><ENTER>cf>
+"     autocmd Filetype python inoremap ;p print(<#>)<esc>/<#><ENTER>cf>
+"     autocmd Filetype python inoremap ;q quit()
+" 
