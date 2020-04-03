@@ -13,6 +13,11 @@ call plug#begin('~/.vim/plugged')
     " vscode ctr p feature
     Plug 'ctrlpvim/ctrlp.vim'
 
+    " vim-prettier
+    Plug 'prettier/vim-prettier', {
+          \ 'do': 'yarn install',
+          \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'vue', 'yaml', 'html'] }
+
     " gruvbox colorscheme
     Plug 'morhetz/gruvbox'
    
@@ -21,6 +26,7 @@ call plug#begin('~/.vim/plugged')
 
     " git plugin
     Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'
 
     " tag completion and rename
     Plug 'alvan/vim-closetag'
@@ -50,7 +56,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
     " check errors
-    Plug 'scrooloose/syntastic'
+    Plug 'w0rp/ale'
 
     " Emmet like vscode
     Plug 'mattn/emmet-vim'
@@ -58,6 +64,15 @@ call plug#begin('~/.vim/plugged')
     " status bar
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
+
+    " javascript
+    Plug 'pangloss/vim-javascript'
+    Plug 'mxw/vim-jsx'
+
+    " snippets
+    Plug 'sirver/ultisnips'
+    Plug 'honza/vim-snippets'
+
 
 
 call plug#end()
@@ -84,7 +99,7 @@ set shiftwidth=4
 set tabstop=4
 
 " gruvbox config
-let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_contrast_dark = 'medium'
 
 " lightline
 " get rid of --insert--
@@ -110,7 +125,7 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 colorscheme gruvbox
 
 " Enable spell checking, s for spell check
-    map <leader>s :setlocal spell! spelllang=en_au<CR>
+    map <C-s>s:setlocal spell! spelllang=en_au<CR>
 
 " ctrlp
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
@@ -124,26 +139,29 @@ colorscheme gruvbox
     let NERDTreeShowLineNumbers=1
     let NERDTreeShowHidden=1
     let NERDTreeMinimalUI = 1
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
     let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
 
-
-" Syntastic
-    set statusline+=%#warningmsg#
-    set statusline+=%{SyntasticStatuslineFlag()}
-    set statusline+=%*
-
-    let g:syntastic_always_populate_loc_list = 1
-    let g:syntastic_auto_loc_list = 1
-    let g:syntastic_check_on_open = 0
-    let g:syntastic_check_on_wq = 0
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
     "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
     let g:indentLine_char_list = ['➜']
 
+" snippets config
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<c-q>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
+" prettier
+let g:prettier#exec_cmd_async = 1
+" when running at every change you may want to disable quickfix
+let g:prettier#quickfix_enabled = 0
+
+" hexokinase color preview
+let g:Hexokinase_highlighters = ['backgroundfull']
 
 " Keybindings
 inoremap jk <esc>
@@ -151,8 +169,6 @@ vnoremap jk <esc>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
-
-inoremap <esc> <nop>
 
 " syntastic error close
 noremap <C-z> :lclose<cr>

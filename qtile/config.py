@@ -42,7 +42,7 @@ mod = "mod4"
 terminal = "alacritty"
 
 #       font/active  inactive  #2f3640    bar-background
-color = ['#a29bfe', '#718093', '#dcdde1', '#2f3640']
+color = ['#b8bb26', '#928374', '#689d6a', '#1d2021']
 # Working on this right now
 colorscheme = {
                 'main_bar': '#2f3640',
@@ -54,8 +54,8 @@ colorscheme = {
                 'group_unfocus': '#7f8fa6',
             }
 
-demenu1 = f"dmenu_run -fn 'JetBrains Mono Nerd Font:size=10' -h 22 -nb {color[3]} "
-demenu2 = f"-nf '#a29bfe' -sb '#30336b' -sf '#dcdde1' -p 'dmenu:'"
+demenu1 = f"dmenu_run -fn 'JetBrains Mono Nerd Font:size=10' -h 24 -nb {color[3]} "
+demenu2 = f"-nf '#b8bb26' -sb '#689d6a' -sf '#1d2021' -p 'dmenu:'"
 
 # Keybindings
 # Resize window
@@ -198,8 +198,8 @@ for i, (name, kwargs) in enumerate(group_names, 1):
 
 
 border_defaults = dict(
-    border_normal=('#7f8fa6'),
-    border_focus=("#0097e6"),
+    border_normal=('#d5c4a1'),
+    border_focus=("#d65d0e"),
     border_width=2,
     margin=8,
 )
@@ -215,13 +215,13 @@ layouts = [
 ]
 
 widget_defaults = dict(
-    font='JetBrains Mono Nerd Font',
+    font='JetBrains Mono Nerd Font bold',
     fontsize=13,
     padding=1,
 )
 
 icon_defaults = dict(
-    font='JetBrains Mono Nerd Font',
+    font='JetBrains Mono Nerd Font bold',
     fontsize=14,
     foreground=color[0],
 )
@@ -313,13 +313,13 @@ screens = [
                    padding_x=12,
                    **icon_defaults,
                    borderwidth=2,
-                   active=color[0],
+                   active=['#458588','#458588'],
                    inactive=color[1],
                    highlight_method='line',
                    # group color
-                   highlight_color=['#30336b', '#30336b'],
+                   highlight_color=['#1d2021','#1d2021'],
                    spacing=0,
-                   this_current_screen_border=color[0],
+                   this_current_screen_border=['#458588','#458588'],
                    this_screen_border=color[0],
                ),
 
@@ -374,9 +374,9 @@ screens = [
                               ),
 
            ],
-           22,
-           background='#2f3640',
-           opacity=0.85,
+           24,
+           background='#1d2021',
+           opacity=0.95,
        ),
     ),
     Screen(top=bar.Bar(widgets=screen_widget, opacity=0.85, size=27, background='#2f3640',)),
