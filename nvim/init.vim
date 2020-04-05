@@ -11,9 +11,11 @@ set termguicolors
 call plug#begin('~/.vim/plugged')
 
     " vscode ctr p feature
+    " quick search file
     Plug 'ctrlpvim/ctrlp.vim'
 
     " vim-prettier
+    " formats codes in better way
     Plug 'prettier/vim-prettier', {
           \ 'do': 'yarn install',
           \ 'for': ['javascript', 'typescript', 'css', 'less', 'scss', 'json', 'graphql', 'markdown', 'react', 'yaml', 'html'] }
@@ -26,18 +28,29 @@ call plug#begin('~/.vim/plugged')
 
     " git plugin
     Plug 'tpope/vim-fugitive'
+    " gutter to tell me 
+    " what was modified and so on..
     Plug 'airblade/vim-gitgutter'
 
     " tag completion and rename
+    " completes html tag
     Plug 'alvan/vim-closetag'
+    " updates the tag if i change on of the tag
     Plug 'AndrewRadev/tagalong.vim'
 
     " code suggestion
+    " extension i am using
+    " coc-python
+    " coc-eslint
+    " coc-tsserver
+    " coc-css
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
+    " icons in nerd tree and bufferline
     Plug 'ryanoasis/vim-devicons'
 
     " surround feature
+    " ys and cs to change the add surroundings
     Plug 'tpope/vim-surround'
 
     " Auto pair brackets and stuff
@@ -46,7 +59,7 @@ call plug#begin('~/.vim/plugged')
     " Commenting
     Plug 'tpope/vim-commentary'
     
-    " show indent
+    " show indent line ->
     Plug 'yggdroot/indentline'
     
     " nerd tree stuff
@@ -55,20 +68,25 @@ call plug#begin('~/.vim/plugged')
     Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 
     " check errors
+    " async linting
     Plug 'w0rp/ale'
 
     " Emmet like vscode
+    " html:5 <C-y>
     Plug 'mattn/emmet-vim'
     
-    " status bar
+    " status line
     Plug 'itchyny/lightline.vim'
     Plug 'mengelbrecht/lightline-bufferline'
 
     " snippets
+    " this one is snippet engine
     Plug 'sirver/ultisnips'
+    " this is the collection of snippets
     Plug 'honza/vim-snippets'
 
     " on language pack to rule them all
+    " this one is for syntax highlight
     Plug 'sheerun/vim-polyglot'
 
 
