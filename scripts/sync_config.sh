@@ -1,3 +1,5 @@
+#!/bin/bash
+
 rsync -ra /home/robovoid/.config/qtile /home/robovoid/dot-files/ &
 rsync -ra /home/robovoid/.config/nvim /home/robovoid/dot-files/ &
 rsync -ra /home/robovoid/.config/alacritty /home/robovoid/dot-files/ &
