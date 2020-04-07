@@ -1,8 +1,18 @@
 #! /bin/bash
-#nmcli con up TP-LINK_B0C2 passwd-file /home/robovoid/password &
-#nmcli con up hokha1234_wlink  passwd-file /home/robovoid/password &
+card = glxinfo|egrep "OpenGL vendor"| cut -d ' ' -f 4 
+
+if [ '$card'='NVIDIA' ]
+then
+    source ~/.screenlayout/nvdia-one-monitor.sh &
+    qtile-cmd -o cmd -f restart &
+else
+    source ~/.screenlayout/multimonitor.sh &
+    qtile-cmd -o cmd -f restart &
+fi
+
 dunst &
 feh --bg-scale ~/.config/wall.jpg &
-compton --config ~/.config/compton/compton.conf  &
+picom &
 nm-applet 2> /dev/null &
 cbatticon 2> /dev/null &
+flameshot &
