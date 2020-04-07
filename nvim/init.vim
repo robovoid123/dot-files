@@ -6,6 +6,7 @@ filetype plugin indent on
 set nocompatible
 set hidden
 set termguicolors
+set clipboard+=unnamedplus
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -95,7 +96,6 @@ call plug#end()
 
 
 syntax on
-let python_highlight_all=1
 set number relativenumber
 set encoding=utf-8
 
@@ -212,6 +212,9 @@ let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 colorscheme gruvbox
+" colorscheme overrides this command
+" if i put it above colorscheme it dose not work
+hi Comment gui=italic
 
 " Enable spell checking, s for spell check
     map <C-s>s:setlocal spell! spelllang=en_au<CR>
@@ -255,12 +258,11 @@ let g:Hexokinase_highlighters = ['backgroundfull']
 " Keybindings
 inoremap jk <esc>
 vnoremap jk <esc>
+tnoremap jk <C-\><C-n>
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
 
-" syntastic error close
-noremap <C-z> :lclose<cr>
 
 " Disable arrow keys in Normal mode
     no <Up> <Nop>
@@ -275,10 +277,18 @@ noremap <C-z> :lclose<cr>
     ino <Right> <Nop>
 
 " Shortcutting split navigation, saving a keypress:
-    map <C-h> <C-w>h
-    map <C-j> <C-w>j
-    map <C-k> <C-w>k
-    map <C-l> <C-w>l
+    inoremap <C-h> <C-\><C-N><C-w>h
+    inoremap <C-j> <C-\><C-N><C-w>j
+    inoremap <C-k> <C-\><C-N><C-w>k
+    inoremap <C-l> <C-\><C-N><C-w>l
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-l> <C-w>l
+    tnoremap <C-h> <C-\><C-N><C-w>h
+    tnoremap <C-j> <C-\><C-N><C-w>j
+    tnoremap <C-k> <C-\><C-N><C-w>k
+    tnoremap <C-l> <C-\><C-N><C-w>l
 
 " Uppercase the current word
 inoremap <C-u> <esc>viwUi
