@@ -1,4 +1,4 @@
-neofetch
+pfetch
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -56,6 +56,7 @@ source $ZSH/oh-my-zsh.sh
 # set default editor to nvim
 export EDITOR=/usr/bin/nvim
 export VISUAL=/usr/bin/nvim
+export TERMINAL=/usr/bin/alacritty
 
 # Alias
 alias zshconfig="vim ~/.zshrc"
@@ -63,15 +64,20 @@ alias q="exit"
 
 #alias
 alias update="source ~/.zshrc"
+alias brimg="python3 /home/robovoid/Codes/learning-python/basic-scripts/wallpaper_bulk_rename.py"
+alias telegram="~/Stuffs/Telegram/Telegram"
+alias telegram-update="~/Stuffs/Telegram/Updater"
 alias usage="du -h -d1"
 alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias R="ranger"
 alias vim=nvim
 alias vi=nvim
 alias qt5tools="/usr/lib64/qt5/bin/designer"
-alias postman="~/Downloads/postman/Postman/Postman"
+alias joplin="~/.joplin/Joplin.AppImage"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 
+
+source /home/robovoid/.config/broot/launcher/bash/br

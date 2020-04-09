@@ -1,6 +1,5 @@
 # Copyright (c) 2010 Aldo Cortesi
 # Copyright (c) 2010, 2014 dequis
-#
 # Copyright (c) 2012 Randall Ma
 # Copyright (c) 2012-2014 Tycho Andersen
 # Copyright (c) 2012 Craig Barnes
@@ -130,7 +129,7 @@ keys = [
     # This one is for sound
     Key([mod], "0", lazy.spawn(terminal + " -e alsamixer")),
     # This is terminal filemanager
-    Key([mod], "f", lazy.spawn(terminal + " -e lf")),
+    Key([mod], "f", lazy.spawn(terminal + " -e ranger")),
     Key([mod, "control"], "p", lazy.spawn("/home/robovoid/scripts/shutdown.sh")),
     # Dmenu stuffs
 
@@ -375,7 +374,7 @@ screens = [
                               ),
 
            ],
-           24,
+           22,
            background='#1d2021',
            opacity=0.95,
        ),
