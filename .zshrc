@@ -10,7 +10,7 @@ fi
 
 # Path to your oh-my-zsh installation.
 export ZSH="/home/robovoid/.oh-my-zsh"
-PATH=/usr/local/texlive/2019/bin/x86_64-linux:$PATH
+PATH=~/scripts:$PATH
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # path to scripts
@@ -39,13 +39,14 @@ bindkey -v '^?' backward-delete-char
 # Zsh plugins
 plugins=(
 	git
+    extract
+    last-working-dir
 	zsh-autosuggestions
     zsh-syntax-highlighting
 	sudo
 	vi-mode
     python
-	pip
-	pipenv
+    colored-man-pages
 	zsh-z
 )
 
