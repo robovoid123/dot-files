@@ -1,12 +1,15 @@
 " leader key = <space>
-let mapleader=" "
-
+let mapleader=","
 " Basic stuff
 filetype plugin indent on
 set nocompatible
 set hidden
 set termguicolors
 set clipboard+=unnamedplus
+set splitbelow splitright
+
+" Trailing white spaces
+autocmd BufWritePre * %s/\s\+$//e
 
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
@@ -30,12 +33,15 @@ call plug#begin('~/.vim/plugged')
     Plug 'yggdroot/indentline'
     Plug 'morhetz/gruvbox'
     Plug 'sheerun/vim-polyglot'
+    Plug 'tpope/vim-repeat'
 call plug#end()
 
 "Some more Basic
 syntax on
 set number relativenumber
 set encoding=utf-8
+set ignorecase
+set smartcase
 
 set nohlsearch
 set nobackup
@@ -49,6 +55,10 @@ set tabstop=4
 
 colorscheme gruvbox
 hi Comment gui=italic
+
+" Neovim :Terminal
+autocmd BufWinEnter,WinEnter term://* startinsert
+autocmd BufLeave term://* stopinsert
 
 
 " CoC Config
@@ -71,9 +81,6 @@ endfunction
 
 inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-q> coc#refresh()
-
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
@@ -85,10 +92,6 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
 augroup mygroup
   autocmd!
   " Setup formatexpr specified filetype(s).
@@ -97,11 +100,6 @@ augroup mygroup
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 augroup end
 
-" Use <C-l> for trigger snippet expand.
-imap <C-q> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-vmap <C-j> <Plug>(coc-snippets-select)
 
 " Use <C-j> for jump to next placeholder, it's default of coc.nvim
 let g:coc_snippet_next = '<c-j>'
@@ -109,8 +107,11 @@ let g:coc_snippet_next = '<c-j>'
 " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
 let g:coc_snippet_prev = '<c-k>'
 
-" Use <C-j> for both expand and jump (make expand higher priority.)
-imap <C-j> <Plug>(coc-snippets-expand-jump)
+" GoTo code navigation.
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
 
 " lightline
 " get rid of --insert--
@@ -119,7 +120,7 @@ let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unnamed= '[No Name]'
  let g:lightline = {
-       \ 'colorscheme': 'seoul256',
+       \ 'colorscheme': 'gruvbox',
        \ 'active': {
            \   'left': [ [ 'mode', 'paste' ],
            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -199,7 +200,12 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
     tnoremap <C-k> <C-\><C-N><C-w>k
     tnoremap <C-l> <C-\><C-N><C-w>l
 
-" Uppercase the current word
-inoremap <C-u> <esc>viwUi
-nnoremap <C-u> viwU<esc>
+" Navigate buffers
+    inoremap <leader>h <esc>:bp<cr>
+    inoremap <leader>l <esc>:bn<cr>
+    nnoremap <leader>h :bp<cr>
+    nnoremap <leader>l :bn<cr>
 
+
+nnoremap <C-t> :CocCommand terminal.Toggle<cr>
+tnoremap <C-t> <C-\><C-n>:CocCommand terminal.Toggle<cr>
