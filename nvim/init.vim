@@ -8,6 +8,7 @@ set termguicolors
 set clipboard+=unnamedplus
 set splitbelow splitright
 
+
 " Trailing white spaces
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -21,6 +22,8 @@ call plug#begin('~/.vim/plugged')
                 \ 'coc-python',
                 \ 'coc-snippets',
                 \ 'coc-pairs',
+                \ 'coc-clangd',
+                \ 'coc-terminal',
                 \]
     Plug 'scrooloose/nerdtree'
     Plug 'itchyny/lightline.vim'
@@ -55,6 +58,11 @@ set tabstop=4
 
 colorscheme gruvbox
 hi Comment gui=italic
+
+set cursorline cursorcolumn
+ au WinLeave * set nocursorline nocursorcolumn
+ au WinEnter * set cursorline cursorcolumn
+
 
 " Neovim :Terminal
 autocmd BufWinEnter,WinEnter term://* startinsert
@@ -199,12 +207,6 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
     tnoremap <C-j> <C-\><C-N><C-w>j
     tnoremap <C-k> <C-\><C-N><C-w>k
     tnoremap <C-l> <C-\><C-N><C-w>l
-
-" Navigate buffers
-    inoremap <leader>h <esc>:bp<cr>
-    inoremap <leader>l <esc>:bn<cr>
-    nnoremap <leader>h :bp<cr>
-    nnoremap <leader>l :bn<cr>
 
 
 nnoremap <C-t> :CocCommand terminal.Toggle<cr>
