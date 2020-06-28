@@ -19,24 +19,30 @@ call plug#begin('~/.vim/plugged')
                 \ 'coc-tsserver',
                 \ 'coc-eslint',
                 \ 'coc-css',
+                \ 'coc-html',
+                \ 'coc-prettier',
                 \ 'coc-python',
                 \ 'coc-snippets',
+                \ 'coc-emmet',
                 \ 'coc-pairs',
                 \ 'coc-clangd',
                 \ 'coc-terminal',
                 \]
     Plug 'scrooloose/nerdtree'
     Plug 'itchyny/lightline.vim'
+    Plug 'alvan/vim-closetag'
     Plug 'mengelbrecht/lightline-bufferline'
-    Plug 'honza/vim-snippets'
     Plug 'tpope/vim-surround'
+    Plug 'honza/vim-snippets'
     Plug 'ryanoasis/vim-devicons'
+    Plug 'tpope/vim-commentary'
+    Plug 'tpope/vim-repeat'
     Plug 'tpope/vim-fugitive'
     Plug 'ctrlpvim/ctrlp.vim'
     Plug 'yggdroot/indentline'
     Plug 'morhetz/gruvbox'
     Plug 'sheerun/vim-polyglot'
-    Plug 'tpope/vim-repeat'
+    Plug 'terryma/vim-multiple-cursors'
 call plug#end()
 
 "Some more Basic
@@ -64,13 +70,17 @@ set cursorline cursorcolumn
  au WinEnter * set cursorline cursorcolumn
 
 
+" --------------------------
+" --------------------------
 " Neovim :Terminal
 autocmd BufWinEnter,WinEnter term://* startinsert
 autocmd BufLeave term://* stopinsert
 
 
+" --------------------------
+" --------------------------
 " CoC Config
-set cmdheight=2
+set cmdheight=1
 set updatetime=300
 set shortmess+=c
 set signcolumn=yes
@@ -121,6 +131,8 @@ nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
+" --------------------------
+" --------------------------
 " lightline
 " get rid of --insert--
 set noshowmode
@@ -147,9 +159,12 @@ let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " ----------------------------------------
+" --------------------------
 " Enable spell checking, s for spell check
     map <C-s>s:setlocal spell! spelllang=en_au<CR>
 
+" --------------------------
+" --------------------------
 " ctrlp
     set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
     let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
@@ -157,7 +172,7 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " Uncomment to autostart the NERDTree
 " autocmd vimenter * NERDTree
-    map <C-n> :NERDTreeToggleVCS<CR>
+    map <A-m> :NERDTreeToggleVCS<CR>
     let g:NERDTreeDirArrowExpandable = '▸'
     let g:NERDTreeDirArrowCollapsible = '▾'
     let NERDTreeShowLineNumbers=1
@@ -167,11 +182,60 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 
     let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
 
+" --------------------------
+" --------------------------
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
     "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
     let g:indentLine_char_list = ['➜']
+
+" --------------------------
+" --------------------------
+" Vim close tag
+
+
+" filenames like *.xml, *.html, *.xhtml, ...
+" These are the file extensions where this plugin is enabled.
+"
+let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *,js, *.ts, *.jsx'
+
+" filenames like *.xml, *.xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filenames = '*.xhtml,*.jsx, *js, *.ts'
+
+" filetypes like xml, html, xhtml, ...
+" These are the file types where this plugin is enabled.
+"
+let g:closetag_filetypes = 'html,xhtml,phtml, js'
+
+" filetypes like xml, xhtml, ...
+" This will make the list of non-closing tags self-closing in the specified files.
+"
+let g:closetag_xhtml_filetypes = 'xhtml,jsx, js'
+
+" integer value [0|1]
+" This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
+"
+let g:closetag_emptyTags_caseSensitive = 1
+
+" dict
+" Disables auto-close if not in a "valid" region (based on filetype)
+"
+let g:closetag_regions = {
+    \ 'typescript.tsx': 'jsxRegion,tsxRegion',
+    \ 'javascript.jsx': 'jsxRegion',
+    \ }
+
+" Shortcut for closing tags, default is '>'
+"
+let g:closetag_shortcut = '>'
+
+" Add > at current position without closing the current tag, default is ''
+"
+let g:closetag_close_shortcut = '<leader>>'
+
 
 " Keybindings
 inoremap jk <esc>
