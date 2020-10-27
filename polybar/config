@@ -1,5 +1,5 @@
 ;==========================================================
-; 
+;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
 ;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
 ;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
@@ -17,34 +17,43 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #1d2021
-background-alt = #32302f
+background = #1e2127
+background-alt = #5c6370
 ;foreground = ${xrdb:color7:#222}
-foreground = #ebdbb1
-foreground-alt = #32302f
-primary = #a89984
-secondary = #d3869b
-alert = #cc241d 
-empty = #ebdbb1
-cpu = #fb4934
-memory =#689d6a
-calander = #98971a
-battery = #b16286
+foreground = #ffffff
+foreground-alt = #abb2bf
+primary = #61afef
+secondary = #d19a66
+alert = #e06c75
+empty = #abb2bf
+cpu = #98c379
+memory =#56b6c2
+calander = #c678dd
+battery = #abb2bf
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 100%
+width = 99%
 height = 24
+offset-x = 0.5%
+offset-y = 0.35%
+
+fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = #689d6a
+line-size = 2
+line-color = ${colors.memory}
+
+border-size = 5
+border-color = ${colors.background}
 
 spacing = 1
 padding = 1
 module-margin = 2
+
+tray-maxsize = 16
 
 font-0 = JetBrains Mono Nerd Font:size=10;2
 font-1 = JetBrains Mono Nerd Font:size=11;2
@@ -52,8 +61,8 @@ font-2 = JetBrains Mono Nerd Font:size=10;1
 font-3 = FontAwesome:size=12;2.5
 font-4 = JetBrains Mono Nerd Font:size=15;1
 
-modules-left = bspwm 
-modules-right = backlight-acpi pulseaudio updates-arch-combined temperature memory cpu battery date 
+modules-left = bspwm
+modules-right = backlight-acpi pulseaudio updates-arch-combined temperature memory cpu battery date
 
 tray-position = right
 tray-padding = 0
@@ -111,39 +120,32 @@ label-unmounted-foreground = ${colors.foreground-alt}
 type = internal/bspwm
 
 
-ws-icon-0 = "I;  "
-ws-icon-1 = "II;  "
-ws-icon-2 = "III;  "
-ws-icon-3 = "IV; 嗢 "
-ws-icon-4 = "V; 溜 "
-ws-icon-5 = "VI; ﱮ "
-ws-icon-6 = "VII; 切 "
-ws-icon-7 = "VIII;  "
-ws-icon-8 = "IX;  "
-ws-icon-9 = "X;  "
-ws-icon-default ="  " 
+ws-icon-default ="  "
 
 format = <label-state> <label-mode>
 
-label-focused = %icon%
+
+label-focused = %icon% %name%
 label-focused-background = ${colors.background-alt}
-label-focused-font = 2
+; label-focused-color= ${colors.danger}
+label-focused-foreground = ${colors.cpu}
+label-focused-font = 1
 label-focused-underline= ${colors.primary}
-; label-focused-padding = 1
+label-focused-padding = 1
 
-label-occupied = %icon%
-label-occupied-font = 2
-; label-occupied-padding = 1
+label-occupied =
+label-occupied-font = 1
+label-occupied-padding = 1
 
-label-urgent = %icon%!
-label-urgent-font = 2
+label-urgent =
+label-urgent-font = 1
 label-urgent-background = ${colors.alert}
-; label-urgent-padding = 1
+label-urgent-padding = 1
 
-label-empty = %icon%
-label-empty-font = 2
+label-empty =
+label-empty-font = 1
 label-empty-foreground = ${colors.foreground-alt}
-; label-empty-padding = 1
+label-empty-padding = 1
 
 ; Separator in between workspaces
  label-separator = " "
@@ -302,7 +304,7 @@ bar-volume-empty-foreground = #ebdbb1
 
 [module/battery]
 type = internal/battery
-battery = BAT1
+battery = BAT0
 adapter = AC
 full-at = 98
 
@@ -319,7 +321,7 @@ format-full-prefix-font = 4
 format-full-prefix-foreground = ${colors.battery}
 
 ramp-capacity-0 =""
-ramp-capacity-1 ="" 
+ramp-capacity-1 =""
 ramp-capacity-2 =""
 ramp-capacity-3 =""
 ramp-capacity-4 =""

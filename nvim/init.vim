@@ -31,18 +31,18 @@ call plug#begin('~/.vim/plugged')
     Plug 'scrooloose/nerdtree'
     Plug 'itchyny/lightline.vim'
     Plug 'alvan/vim-closetag'
-    Plug 'mengelbrecht/lightline-bufferline'
-    Plug 'tpope/vim-surround'
-    Plug 'honza/vim-snippets'
-    Plug 'ryanoasis/vim-devicons'
-    Plug 'tpope/vim-commentary'
-    Plug 'tpope/vim-repeat'
-    Plug 'tpope/vim-fugitive'
+    Plug 'mengelbrecht/lightline-bufferline' " line
+    Plug 'tpope/vim-surround' " ysaw
+    Plug 'honza/vim-snippets' " for snippets
+    Plug 'ryanoasis/vim-devicons' " Icon packs
+    Plug 'tpope/vim-commentary' " comment stuff out
+    Plug 'tpope/vim-repeat' " Increase the . functionality
+    Plug 'tpope/vim-fugitive' " Git wrapper
     Plug 'ctrlpvim/ctrlp.vim'
-    Plug 'yggdroot/indentline'
-    Plug 'morhetz/gruvbox'
-    Plug 'sheerun/vim-polyglot'
-    Plug 'terryma/vim-multiple-cursors'
+    Plug 'yggdroot/indentline' " Visual for indentation
+    Plug 'joshdick/onedark.vim'
+    Plug 'sheerun/vim-polyglot' " Language pack
+    Plug 'vimwiki/vimwiki' " Vim note taking
 call plug#end()
 
 "Some more Basic
@@ -62,7 +62,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-colorscheme gruvbox
+colorscheme onedark
 hi Comment gui=italic
 
 set cursorline cursorcolumn
@@ -140,7 +140,7 @@ let g:lightline#bufferline#show_number  = 1
 let g:lightline#bufferline#enable_devicons = 1
 let g:lightline#bufferline#unnamed= '[No Name]'
  let g:lightline = {
-       \ 'colorscheme': 'gruvbox',
+       \ 'colorscheme': 'onedark',
        \ 'active': {
            \   'left': [ [ 'mode', 'paste' ],
            \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -236,6 +236,7 @@ let g:closetag_shortcut = '>'
 "
 let g:closetag_close_shortcut = '<leader>>'
 
+let g:python3_host_prog = '/usr/bin/python3'
 
 " Keybindings
 inoremap jk <esc>

@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	~/scripts/dmenu_run.sh
+	rofi -show drun -show-icons -font "JetBrains Mono Nerd Font 12"
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -102,6 +102,9 @@ super + {Left,Down,Up,Right}
 
 super + ctrl + p
 	~/scripts/shutdown.sh
+
+super + ctrl + o
+	~/scripts/suspend.sh
 
 super + ctrl + c
     ~/scripts/list.sh

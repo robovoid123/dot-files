@@ -1,5 +1,9 @@
 # Configuration for Alacritty, the GPU enhanced terminal emulator.
 
+# This is a chanange
+#
+
+#
 # Any items in the `env` entry below will be added as
 # environment variables. Some entries may override variables
 # set by alacritty itself.
@@ -109,7 +113,7 @@ font:
     #   - (macOS) Menlo
     #   - (Linux/BSD) monospace
     #   - (Windows) Consolas
-    family: "mononoki Nerd Font"
+    family: mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Regular
@@ -120,7 +124,7 @@ font:
     #
     # If the bold family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "mononoki Nerd Font"
+    family: mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold
@@ -131,7 +135,7 @@ font:
     #
     # If the italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "mononoki Nerd Font"
+    family: mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Italic
@@ -142,13 +146,13 @@ font:
     #
     # If the bold italic family is not specified, it will fall back to the
     # value specified for the normal font.
-    family: "mononoki Nerd Font"
+    family: mononoki Nerd Font
 
     # The `style` can be specified to pick a specific face.
     style: Bold Italic
 
   # Point size
-  size: 10.5
+  size: 12
 
 
   # Offset is the extra space around each character. `offset.y` can be thought of
@@ -185,90 +189,49 @@ font:
 
 # Colors (Gruvbox dark)
 colors:
+  # COLORSCHEME: one_dark.yaml
   # Default colors
   primary:
     # hard contrast: background = '#1d2021'
-    background: '#282828'
-    # soft contrast: background = '#32302f'
-    foreground: '#ebdbb2'
+    background: '0x1e2127'
+    foreground: '0xabb2bf'
 
   # Normal colors
   normal:
-    black:   '#282828'
-    red:     '#cc241d'
-    green:   '#98971a'
-    yellow:  '#d79921'
-    blue:    '#458588'
-    magenta: '#b16286'
-    cyan:    '#689d6a'
-    white:   '#a89984'
+    black: '0x1e2127'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xd19a66'
+    blue: '0x61afef'
+    magenta: '0xc678dd'
+    cyan: '0x56b6c2'
+    white: '0xabb2bf'
 
   # Bright colors
   bright:
-    black:   '#928374'
-    red:     '#fb4934'
-    green:   '#b8bb26'
-    yellow:  '#fabd2f'
-    blue:    '#83a598'
-    magenta: '#d3869b'
-    cyan:    '#8ec07c'
-    white:   '#ebdbb2'
-  # Dim colors
-  #
-  # If the dim colors are not set, they will be calculated automatically based
-  # on the `normal` colors.
-  #dim:
-  #  black:   '0x000000'
-  #  red:     '0x8c3336'
-  #  green:   '0x7a8530'
-  #  yellow:  '0x97822e'
-  #  blue:    '0x506d8f'
-  #  magenta: '0x80638e'
-  #  cyan:    '0x497e7a'
-  #  white:   '0x9a9a9a'
+    black: '0x5c6370'
+    red: '0xe06c75'
+    green: '0x98c379'
+    yellow: '0xd19a66'
+    blue: '0x61afef'
+    magenta: '0xc678dd'
+    cyan: '0x56b6c2'
+    white: '0xffffff'
+  cursor:
+    text: '0xFF261E'
+    cursor: '0xFF261E'
 
-  # Indexed Colors
-  #
-  # The indexed colors include all colors from 16 to 256.
-  # When these are not set, they're filled with sensible defaults.
-  #
-  # Example:
-  #   `- { index: 16, color: '0xff00ff' }`
-  #
-  #indexed_colors: []
-
-# Visual Bell
-#
-# Any time the BEL code is received, Alacritty "rings" the visual bell. Once
-# rung, the terminal background will be set to white and transition back to the
-# default background color. You can control the rate of this transition by
-# setting the `duration` property (represented in milliseconds). You can also
-# configure the transition function by setting the `animation` property.
-#
-# Values for `animation`:
-#   - Ease
-#   - EaseOut
-#   - EaseOutSine
-#   - EaseOutQuad
-#   - EaseOutCubic
-#   - EaseOutQuart
-#   - EaseOutQuint
-#   - EaseOutExpo
-#   - EaseOutCirc
-#   - Linear
-#
-# Specifying a `duration` of `0` will disable the visual bell.
-#visual_bell:
-#  animation: EaseOutExpo
-#  duration: 0
-#  color: '0xffffff'
-
-# Background opacity
-#
-# Window opacity as a floating point number from `0.0` to `1.0`.
-# The value `0.0` is completely transparent and `1.0` is opaque.
-# background_opacity: 1.0
-background_opacity: 1
+  # Normal colors
+  dim:
+    black: '0x232323'
+    red: '0x74423f'
+    green: '0x5e6547'
+    yellow: '0x8b7653'
+    blue: '0x556b79'
+    magenta: '0x6e4962'
+    cyan: '0x5c8482'
+    white: '0x828282'
+background_opacity: .97
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
