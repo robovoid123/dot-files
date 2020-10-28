@@ -5,6 +5,7 @@ import sys
 import subprocess
 import os
 import json
+from os.path import expanduser
 
 
 print_help = lambda : print(f"""
@@ -19,6 +20,9 @@ config_path_list = []
 
 def clean_data(filename='configs.json'):
     global config_path_list
+    if not os.path.exists(filename):
+        with open(filename, mode='w', encoding='utf-8') as f:
+            json.dump([], f)
     with open(filename) as f:
         config_path_list = json.load(f)
 
@@ -33,7 +37,6 @@ def clean_data(filename='configs.json'):
         temp = list(filter(lambda x: x != '.config', temp))
         temp = list(filter(lambda x : x != '~', temp))
         temp = list(filter(lambda x : x != '', temp))
-        from os.path import expanduser
         home = ''
         if not flag:
             home = expanduser('~')
@@ -91,7 +94,6 @@ def sync_out():
         sync(rsync_command)
 
 def git_push(folder='dot-files'):
-    from os.path import expanduser
     home = expanduser('~')
     pa = f'{home}/{folder}'
     if os.path.exists(pa):
@@ -109,6 +111,8 @@ if __name__ == '__main__':
     if len(sys.argv) > 1:
         if sys.argv[1] in commands:
             command = sys.argv[1]
+            home = expanduser('~')
+            os.chdir(f'{home}/scripts')
             clean_data()
 
             if command == '-i':
