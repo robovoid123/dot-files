@@ -113,6 +113,10 @@ let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
 " Default fzf layout
 " - down / up / left / right
 let g:fzf_layout = { 'down': '~40%' }
+
+
+nnoremap // :BLines<CR>
+nnoremap ?? :Rg<CR>
 "
 " Enable file type detection.
 " Also load indent files, to automatically do language-dependent indenting.
