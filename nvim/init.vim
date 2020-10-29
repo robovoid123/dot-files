@@ -1,5 +1,5 @@
 " leader key = <space>
-let mapleader=","
+let mapleader="\<Space>"
 " Basic stuff
 filetype plugin indent on
 set nocompatible
@@ -24,7 +24,8 @@ call plug#begin('~/.vim/plugged')
                 \ 'coc-clangd',
                 \]
     Plug 'itchyny/lightline.vim'
-    Plug 'junegunn/fzf'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'alvan/vim-closetag'
     Plug 'mengelbrecht/lightline-bufferline' " line
     Plug 'tpope/vim-surround' " ysaw
@@ -37,10 +38,14 @@ call plug#begin('~/.vim/plugged')
     Plug 'joshdick/onedark.vim'
     Plug 'sheerun/vim-polyglot' " Language pack
     Plug 'vimwiki/vimwiki' " Vim note taking
+    Plug 'dyng/ctrlsf.vim'
+    Plug 'rrethy/vim-illuminate'
+    Plug 'machakann/vim-highlightedyank'
 call plug#end()
 
 "Some more Basic
 syntax on
+set autoindent
 set number relativenumber
 set encoding=utf-8
 set ignorecase
@@ -55,6 +60,10 @@ set expandtab
 set smarttab
 set shiftwidth=4
 set tabstop=4
+set shiftround
+
+set spell
+set spelllang=en_us
 
 colorscheme onedark
 hi Comment gui=italic
@@ -62,6 +71,58 @@ hi Comment gui=italic
 set cursorline cursorcolumn
  au WinLeave * set nocursorline nocursorcolumn
  au WinEnter * set cursorline cursorcolumn
+
+
+" Remove trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_winsize = 20
+let g:netrw_preview = 1
+let g:netrw_alto = 0
+nnoremap <C-n> :Lexplore<cr>
+set autochdir
+
+function! NetrwMappings()
+    nnoremap <buffer> <C-l> <C-w>l
+endfunction
+
+augroup ProjectDrawer
+  autocmd!
+  autocmd filetype netrw call NetrwMappings()
+augroup END
+
+" ctrlsf
+nmap <leader>a :CtrlSF -R ""<Left>
+nmap <leader>A <Plug>CtrlSFCwordPath -W<CR>
+nmap <leader>c :CtrlSFFocus<CR>
+nmap <leader>C :CtrlSFToggle<CR>
+
+let g:ctrlsf_winsize = '33%'
+let g:ctrlsf_auto_close = 0
+let g:ctrlsf_confirm_save = 0
+let g:ctrlsf_auto_focus = {
+    \ 'at': 'start',
+    \ }
+
+" fzf
+let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+
+" Default fzf layout
+" - down / up / left / right
+let g:fzf_layout = { 'down': '~40%' }
+"
+" Enable file type detection.
+" Also load indent files, to automatically do language-dependent indenting.
+filetype plugin indent on
+
+" Find files with fzf
+nmap <C-p> :Files<CR>
+nmap <leader>p :Commands<CR>
+
+
 
 " --------------------------
 " --------------------------
@@ -129,7 +190,7 @@ let g:lightline#bufferline#unnamed= '[No Name]'
        \ 'colorscheme': 'onedark',
        \ 'active': {
            \   'left': [ [ 'mode', 'paste' ],
-           \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+           \             ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
            \ },
            \ 'component_function': {
            \   'gitbranch': 'FugitiveHead',
@@ -144,13 +205,6 @@ let g:lightline.tabline = { 'left': [['buffers']], 'right': [['close']]}
 let g:lightline.component_expand = {'buffers': 'lightline#bufferline#buffers'}
 let g:lightline.component_type   = {'buffers': 'tabsel'}
 
-" ----------------------------------------
-" --------------------------
-" Enable spell checking, s for spell check
-    map <C-s>s:setlocal spell! spelllang=en_au<CR>
-
-" --------------------------
-" --------------------------
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
