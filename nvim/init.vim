@@ -8,10 +8,6 @@ set termguicolors
 set clipboard+=unnamedplus
 set splitbelow splitright
 
-
-" Trailing white spaces
-autocmd BufWritePre * %s/\s\+$//e
-
 " Specify a directory for plugins
 call plug#begin('~/.vim/plugged')
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -26,10 +22,9 @@ call plug#begin('~/.vim/plugged')
                 \ 'coc-emmet',
                 \ 'coc-pairs',
                 \ 'coc-clangd',
-                \ 'coc-terminal',
                 \]
-    Plug 'scrooloose/nerdtree'
     Plug 'itchyny/lightline.vim'
+    Plug 'junegunn/fzf'
     Plug 'alvan/vim-closetag'
     Plug 'mengelbrecht/lightline-bufferline' " line
     Plug 'tpope/vim-surround' " ysaw
@@ -38,7 +33,6 @@ call plug#begin('~/.vim/plugged')
     Plug 'tpope/vim-commentary' " comment stuff out
     Plug 'tpope/vim-repeat' " Increase the . functionality
     Plug 'tpope/vim-fugitive' " Git wrapper
-    Plug 'ctrlpvim/ctrlp.vim'
     Plug 'yggdroot/indentline' " Visual for indentation
     Plug 'joshdick/onedark.vim'
     Plug 'sheerun/vim-polyglot' " Language pack
@@ -68,14 +62,6 @@ hi Comment gui=italic
 set cursorline cursorcolumn
  au WinLeave * set nocursorline nocursorcolumn
  au WinEnter * set cursorline cursorcolumn
-
-
-" --------------------------
-" --------------------------
-" Neovim :Terminal
-autocmd BufWinEnter,WinEnter term://* startinsert
-autocmd BufLeave term://* stopinsert
-
 
 " --------------------------
 " --------------------------
@@ -165,30 +151,11 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " --------------------------
 " --------------------------
-" ctrlp
-    set wildignore+=*/.git/*,*/.hg/*,*/.svn/*,*/node_modules/*
-    let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-
-" Uncomment to autostart the NERDTree
-" autocmd vimenter * NERDTree
-    map <A-m> :NERDTreeToggleVCS<CR>
-    let g:NERDTreeDirArrowExpandable = '▸'
-    let g:NERDTreeDirArrowCollapsible = '▾'
-    let NERDTreeShowLineNumbers=1
-    let NERDTreeShowHidden=1
-    let NERDTreeMinimalUI = 1
-    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-
-    let g:NERDTreeIgnore = ['^node_modules$', '^.git$']
-
-" --------------------------
-" --------------------------
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
     "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-    let g:indentLine_char_list = ['➜']
+    let g:indentLine_char_list = ['']
 
 " --------------------------
 " --------------------------
@@ -272,7 +239,3 @@ nnoremap <leader>sv :source $MYVIMRC<cr>
     tnoremap <C-j> <C-\><C-N><C-w>j
     tnoremap <C-k> <C-\><C-N><C-w>k
     tnoremap <C-l> <C-\><C-N><C-w>l
-
-
-nnoremap <C-t> :CocCommand terminal.Toggle<cr>
-tnoremap <C-t> <C-\><C-n>:CocCommand terminal.Toggle<cr>

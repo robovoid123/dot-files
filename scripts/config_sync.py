@@ -136,13 +136,15 @@ class SyncConf:
 
     def git_push(self):
         home = expanduser('~')
-        pa = f'{home}/{self.backup_path}'
+        pa = f'{self.backup_path}'
         if os.path.exists(pa):
             os.chdir(pa)
             os.system('git init')
             os.system('git add .')
             os.system('git commit -m "update"')
             os.system('git push -u origin master')
+        else:
+            print(self.backup_path, 'path does not exists')
 
 # list of available commands
 # commands not in this list will not run
@@ -155,8 +157,8 @@ if __name__ == '__main__':
             home = expanduser('~')
             script_location = f'{home}/scripts'
             sync = SyncConf(
-                config_path='config_path_list.json',
-                backup_path='/home/robovoid/dot-files/'
+                config_path='/home/robovoid/.config/config_path_list.json',
+                backup_path='/home/robovoid/dot-files'
             )
             os.chdir(script_location)
 
