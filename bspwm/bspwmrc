@@ -2,6 +2,8 @@
 
 bspc rule -r "*"
 
+python /home/robovoid/scripts/monitor.py
+
 killall polybar example
 killall sxhkd
 killall dunst
@@ -50,7 +52,5 @@ bspc config urgent_border_color 	      "#dd2727"
 
 bspc rule -a Gimp desktop='^8' state=floating follow=on
 bspc rule -a firefox desktop='^3', state=monocle follow=on
-bspc rule -a Zathura desktop='^6', state=fullscreen follow=on
-bspc rule -a TelegramDesktop desktop='^7', state=tiled follow=on
-bspc rule -a Emacs  state=tiled follow=on
+bspc rule -a Zathura  state=tiled follow=on
 bspc rule -a Screenkey manage=off

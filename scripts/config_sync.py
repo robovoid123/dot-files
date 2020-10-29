@@ -16,9 +16,11 @@ class SyncConf:
 
     # all the availabe help for tags
     help_tags = [
+        ('-l', 'List all the file to sync'),
         ('-o', 'To sync from dot file'),
         ('-i', 'To sync into dot files from pc'),
         ('-a', '/home/abcd/.config/qtile/ To add a config file'),
+        ('-r', '/home/abcd/.config/qtile/ To remove from config file'),
         ('-p', 'To push in git'),
         ('-h', 'For more information')
     ]
@@ -110,6 +112,12 @@ class SyncConf:
             else:
                 print('path not in list')
 
+    def list_config(self):
+        with open(self.filename) as f:
+            data = json.load(f)
+            for path in data:
+                print(path)
+
     def sync(self, rsync_command):
         subprocess.call(rsync_command, shell=True)
         print('executing: ', rsync_command)
@@ -137,7 +145,8 @@ class SyncConf:
             os.system('git push -u origin master')
 
 # list of available commands
-commands = ['-i', '-o', '-h', '-a', '-r', '-p']
+# commands not in this list will not run
+commands = ['-i', '-o', '-h', '-a', '-r', '-p', '-l']
 
 if __name__ == '__main__':
     if len(sys.argv) > 1:
@@ -154,15 +163,18 @@ if __name__ == '__main__':
             if command == '-i':
                 sync.sync_in()
 
+            elif command == '-l':
+                sync.list_config()
+
             elif command == '-o':
                 sync.sync_out()
 
             elif command == '-a':
-                if len(sys.argv > 2):
+                if len(sys.argv) > 2:
                     sync.add_config(path=sys.argv[2])
 
             elif command == '-r':
-                if len(sys.argv > 2):
+                if len(sys.argv) > 2:
                     sync.remove_config(path=sys.argv[2])
 
             elif command == '-p':
