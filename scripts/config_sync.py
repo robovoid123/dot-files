@@ -131,11 +131,10 @@ class SyncConf:
     def sync_out(self):
         for path, name in self.config_path_list:
             path = '/'.join(filter(lambda x: x != '', path.split('/')))
-            rsync_command = f"rsync -ra {self.backup_path}{name} /{path}"
+            rsync_command = f"rsync -ra {self.backup_path}/{name} /{path}"
             self.sync(rsync_command)
 
     def git_push(self):
-        home = expanduser('~')
         pa = f'{self.backup_path}'
         if os.path.exists(pa):
             os.chdir(pa)
@@ -158,7 +157,7 @@ if __name__ == '__main__':
             script_location = f'{home}/scripts'
             sync = SyncConf(
                 config_path='/home/robovoid/.config/config_path_list.json',
-                backup_path='/home/robovoid/dot-files'
+                backup_path='/home/robovoid/dot-files/'
             )
             os.chdir(script_location)
 
