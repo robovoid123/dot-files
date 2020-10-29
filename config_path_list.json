@@ -17,5 +17,6 @@
     "/home/robovoid/.screenlayout",
     "/home/robovoid/.config/rofi",
     "/home/robovoid/.config/zathura",
-    "/home/robovoid/.config/config_path_list.json"
+    "/home/robovoid/.config/config_path_list.json",
+    "/home/robovoid/.tmux.conf"
 ]
