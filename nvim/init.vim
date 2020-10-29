@@ -42,6 +42,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'rrethy/vim-illuminate'
     Plug 'machakann/vim-highlightedyank'
     Plug 'edkolev/tmuxline.vim'
+    Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 "Some more Basic
