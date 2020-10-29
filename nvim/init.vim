@@ -41,6 +41,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'dyng/ctrlsf.vim'
     Plug 'rrethy/vim-illuminate'
     Plug 'machakann/vim-highlightedyank'
+    Plug 'edkolev/tmuxline.vim'
 call plug#end()
 
 "Some more Basic
@@ -93,6 +94,9 @@ augroup ProjectDrawer
   autocmd!
   autocmd filetype netrw call NetrwMappings()
 augroup END
+
+"tmuxline
+let g:tmuxline_powerline_separators = 0
 
 " ctrlsf
 nmap <leader>a :CtrlSF -R ""<Left>
