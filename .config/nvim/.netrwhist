@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =3
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/robovoid/Code/Django/djecommerce/djecommerce/core'
+let g:netrw_dirhist_5='/home/robovoid/Code/Django/djecommerce/djecommerce'
+let g:netrw_dirhist_4='/home/robovoid/Code/Django/djecommerce'
 let g:netrw_dirhist_3='/home/robovoid/Code/Django/djecommerce/djecommerce'
 let g:netrw_dirhist_2='/home/robovoid/Code/Django/djecommerce'
 let g:netrw_dirhist_1='/home/robovoid/Code/Django/djecommerce/djecommerce'
@@ -7,6 +10,3 @@ let g:netrw_dirhist_0='/home/robovoid/Code/Django/djecommerce/djecommerce/core'
 let g:netrw_dirhist_9='/home/robovoid/Code/Django/djecommerce/djecommerce'
 let g:netrw_dirhist_8='/home/robovoid/dot-files'
 let g:netrw_dirhist_7='/home/robovoid/dot-files/alacritty'
-let g:netrw_dirhist_6='/home/robovoid/dot-files'
-let g:netrw_dirhist_5='/home/robovoid/dot-files/.git/hooks'
-let g:netrw_dirhist_4='/home/robovoid/dot-files/.git'

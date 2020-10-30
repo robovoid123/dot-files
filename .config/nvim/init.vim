@@ -1,4 +1,4 @@
-" leader key = <space>
+
 let mapleader="\<Space>"
 " Basic stuff
 filetype plugin indent on
@@ -64,7 +64,6 @@ set shiftwidth=4
 set tabstop=4
 set shiftround
 
-set spell
 set spelllang=en_us
 
 colorscheme onedark
@@ -217,8 +216,7 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
-    "let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-    let g:indentLine_char_list = ['']
+    let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 " --------------------------
 " --------------------------
@@ -268,10 +266,14 @@ let g:closetag_close_shortcut = '<leader>>'
 
 let g:python3_host_prog = '/usr/bin/python3'
 
-" Keybindings
+" Key bindings
 inoremap jk <esc>
 vnoremap jk <esc>
+
 tnoremap jk <C-\><C-n>
+" Spell-check set to <leader>o, 'o' for 'orthography':
+	nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
+    nnoremap <leader>O  z=
 
 nnoremap <leader>ev :vsplit $MYVIMRC<cr>
 nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -290,7 +292,7 @@ nnoremap <leader>v :vsplit<Return><C-w>w
     ino <Left> <Nop>
     ino <Right> <Nop>
 
-" Shortcutting split navigation, saving a keypress:
+" Shortcutting split navigation, saving a key press:
     inoremap <C-h> <C-\><C-N><C-w>h
     inoremap <C-j> <C-\><C-N><C-w>j
     inoremap <C-k> <C-\><C-N><C-w>k
