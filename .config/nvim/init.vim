@@ -43,6 +43,7 @@ call plug#begin('~/.vim/plugged')
     Plug 'machakann/vim-highlightedyank'
     Plug 'edkolev/tmuxline.vim'
     Plug 'christoomey/vim-tmux-navigator'
+    Plug 'tmhedberg/simpylfold'
 call plug#end()
 
 "Some more Basic
@@ -76,6 +77,15 @@ set cursorline cursorcolumn
 
 " Remove trailing whitespace on save
 autocmd BufWritePre * %s/\s\+$//e
+
+" folding
+if has('folding')
+  if has('windows')
+    set fillchars=vert:┃              " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
+  endif
+  set foldmethod=indent               " not as cool as syntax, but faster
+  set foldlevelstart=99             " start unfolded
+endif
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
@@ -216,7 +226,7 @@ let g:lightline.component_type   = {'buffers': 'tabsel'}
 
 " indent plugin stuff
     let g:indentLine_color_term = 239
-    let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+    let g:indentLine_char_list = ['┃', '¦', '┆', '┊']
 
 " --------------------------
 " --------------------------
