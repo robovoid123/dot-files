@@ -1,9 +1,0 @@
-- [X] pagination
-- [X] checkout_page
-- [ ] search/filter option
-- [ ] admin page (modify)
-- [ ] spotlight insert
-- [ ] address book
-- [ ] order to delivery flags/progress bar
-- [ ] category
-- [ ] defaut address opiton
