@@ -101,10 +101,10 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 super + ctrl + p
-	~/scripts/shutdown.sh
+	~/scripts/shutdown
 
 super + ctrl + o
-	~/scripts/suspend.sh
+	~/scripts/monitor.py
 
 super + ctrl + c
     ~/scripts/list.sh

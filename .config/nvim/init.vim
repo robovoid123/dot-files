@@ -45,6 +45,8 @@
         Plug 'tmhedberg/simpylfold' "Makes python folding bearable
         Plug 'rrethy/vim-illuminate' " Highlights word currently under cursor
         Plug 'tpope/vim-vinegar' "Enhances netrw
+        Plug 'junegunn/limelight.vim'
+        Plug 'junegunn/goyo.vim'
     call plug#end()
 "
     "Some more Basic stuff
@@ -283,14 +285,23 @@
 
     let g:python3_host_prog = '/usr/bin/python3'
 "
+    "Limelight
+    nnoremap <leader>l :Limelight!! 0.4<cr>
+"
+     "Goyo
+     nnoremap <leader>g :Goyo<cr>
+     nnoremap <leader>G :Goyo!<cr>
+"
+    " Spell-check set to <leader>o, 'o' for 'orthography':
+    nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
+        nnoremap <leader>O  z=
+"
     " Key bindings
     inoremap jk <esc>
     vnoremap jk <esc>
 
     tnoremap jk <C-\><C-n>
-    " Spell-check set to <leader>o, 'o' for 'orthography':
-        nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
-        nnoremap <leader>O  z=
+
 
     nnoremap <leader>ev :vsplit $MYVIMRC<cr>
     nnoremap <leader>sv :source $MYVIMRC<cr>
@@ -322,3 +333,4 @@
         tnoremap <C-j> <C-\><C-N><C-w>j
         tnoremap <C-k> <C-\><C-N><C-w>k
         tnoremap <C-l> <C-\><C-N><C-w>l
+

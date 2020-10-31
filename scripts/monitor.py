@@ -30,8 +30,11 @@ for m_info in output:
 
 card = card.split('\n')[0]
 
-if len(monitor) > 1:
+choice = os.system('echo -e "yes\nno" | rofi -dmenu -p "Monitor setup?"')
+
+if choice:
     if card == 'NVIDIA':
+        print(choice)
         os.system('~/.screenlayout/one-main-nvidia.sh')
     elif card == 'Intel':
         os.system('~/.screenlayout/one-main.sh')
