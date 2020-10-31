@@ -39,11 +39,11 @@
         Plug 'sheerun/vim-polyglot' " Language pack
         Plug 'vimwiki/vimwiki' " Vim note taking
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
-        Plug 'rrethy/vim-illuminate' " Highlights word currently under cursor
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
         Plug 'edkolev/tmuxline.vim' "To generate tmuxline same as vim theme
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'tmhedberg/simpylfold' "Makes python folding bearable
+        Plug 'rrethy/vim-illuminate' " Highlights word currently under cursor
         Plug 'tpope/vim-vinegar' "Enhances netrw
     call plug#end()
 "
@@ -139,7 +139,15 @@
     set cmdheight=1
     set updatetime=300
     set shortmess+=c
+
+    " Always show the signcolumn, otherwise it would shift the text each time
+    " diagnostics appear/become resolved.
+    if has("patch-8.1.1564")
+    " Recently vim can merge signcolumn and number column into one
+    set signcolumn=number
+    else
     set signcolumn=yes
+    endif
 
 
     inoremap <silent><expr> <TAB>
@@ -180,6 +188,19 @@
 
     " Use <C-k> for jump to previous placeholder, it's default of coc.nvim
     let g:coc_snippet_prev = '<c-k>'
+
+    " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
+
+    " Show commands.
+    nnoremap <silent><nowait> <leader>cc  :<C-u>CocList commands<cr>
+    " Find symbol of current document.
+    nnoremap <silent><nowait> <leader>co  :<C-u>CocList outline<cr>
+    " Manage extensions.
+    nnoremap <silent><nowait> <leader>ce  :<C-u>CocList extensions<cr>
+    " Use <leader>cs for trigger snippet expand.
+    imap <leader>cs <Plug>(coc-snippets-expand)
 
     " GoTo code navigation.
     nmap <silent> gd <Plug>(coc-definition)
