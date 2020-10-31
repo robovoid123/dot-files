@@ -1,0 +1,7 @@
+#!/usr/bin/python
+import subprocess
+choice = subprocess.check_output('echo -e "shutdown\nsuspend" | rofi -dmenu -p "Shutdown/Suspend"', shell=True, universal_newlines=True)
+if choice == "shutdown\n":
+    subprocess.call("systemctl shutdown", shell=True)
+elif choice == "suspend\n":
+    subprocess.call("systemctl suspend", shell=True)
