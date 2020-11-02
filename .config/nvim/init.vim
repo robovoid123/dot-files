@@ -35,10 +35,10 @@
         Plug 'tpope/vim-repeat' " Increase the . functionality
         Plug 'tpope/vim-fugitive' " Git wrapper
         Plug 'yggdroot/indentline' " Visual for indentation
-        Plug 'joshdick/onedark.vim' " Vim theme
         Plug 'sheerun/vim-polyglot' " Language pack
         Plug 'vimwiki/vimwiki' " Vim note taking
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
+        Plug 'joshdick/onedark.vim'
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
         Plug 'edkolev/tmuxline.vim' "To generate tmuxline same as vim theme
         Plug 'christoomey/vim-tmux-navigator'
@@ -289,8 +289,7 @@
     nnoremap <leader>l :Limelight!! 0.4<cr>
 "
      "Goyo
-     nnoremap <leader>g :Goyo<cr>
-     nnoremap <leader>G :Goyo!<cr>
+     nnoremap <leader>g :Goyo<cr>:Limelight!! 0.4<cr>
 "
     " Spell-check set to <leader>o, 'o' for 'orthography':
     nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
