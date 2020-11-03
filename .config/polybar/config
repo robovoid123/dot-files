@@ -17,8 +17,9 @@
 
 [colors]
 ;background = ${xrdb:color0:#222}
-background = #1e2127
-background-alt = #5c6370
+background = #282c34
+background-alt = #21242B
+;
 ;foreground = ${xrdb:color7:#222}
 foreground = #abb2bf
 foreground-alt = #abb2bf
@@ -30,27 +31,27 @@ cpu = #98c379
 memory =#56b6c2
 calander = #c678dd
 battery = #abb2bf
+border = #e06c75
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
 width = 100%
-height = 22
+height = 28
 offset-x = 0%
 offset-y = 0%
+border-color = ${colors.background}
+border-size = 4
 
 fixed-center = true
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-border-size = 5
-border-color = ${colors.background}
-
 spacing = 0
-padding = 0
+padding = 2
 module-margin = 1
 
-tray-maxsize = 14
+tray-maxsize = 16
 
 font-0 = JetBrains Mono Nerd Font:size=10;2
 font-1 = JetBrains Mono Nerd Font:size=10;2
@@ -59,12 +60,12 @@ font-3 = FontAwesome:size=12;2.5
 font-4 = JetBrains Mono Nerd Font:size=15;1
 
 modules-left = bspwm
-modules-center = xwindow
-modules-right = backlight-acpi  pulseaudio updates-arch-combined temperature memory cpu battery date
+modules-center = xwindow date
+modules-right = updates-arch-combined temperature memory cpu
 
 tray-position = right
 tray-padding = 2
-;tray-background = #0063ff
+tray-background = ${colors.background-alt}
 
 wm-restack = bspwm
 
@@ -158,39 +159,43 @@ card = intel_backlight
 type = internal/cpu
 interval = 2
 format-prefix = " "
-format-prefix-foreground = ${colors.cpu}
+format-background = ${colors.cpu}
+format-foreground =  ${colors.background}
+format-padding = 1
 label = %percentage:2%%
 
 [module/memory]
 type = internal/memory
 interval = 20
-format-prefix = " "
-format-prefix-foreground = ${colors.memory}
-label = %percentage_used%%
+format-background = ${colors.memory}
+format-foreground =  ${colors.background}
+format-padding = 1
+format-prefix = "  "
+label = %percentage_used%
 
 [module/date]
 type = internal/date
 interval = 60
+format-padding = 1
 
-date = "%Y %b %d (%a)"
+date = "%b%d"
 time = "%I:%M%p"
 
-format-prefix =" "
-format-prefix-foreground = ${colors.calander}
-
-label = %date% %time%
+label = %date% %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
 
 format-volume = <bar-volume>
 label-volume = VOL %percentage%%
-label-volume-foreground = ${root.foreground}
+label-volume-foreground = ${colors.background}
+label-volume-background = ${colors.calander}
 
 label-muted =  muted
-label-muted-foreground = ${colors.alert}
+label-muted-foreground = ${colors.background}
 
 bar-volume-width = 6
+bar-volume-padding = 1
 bar-volume-foreground-0 = #8ec07c
 bar-volume-foreground-1 = #8ec07c
 bar-volume-foreground-2 = #8ec07c
@@ -252,13 +257,17 @@ format = <ramp><label>
 format-warn = <ramp><label-warn>
 
 label = %temperature-c%
+label-foreground = ${colors.background}
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.background}
+format-background = ${colors.border}
+format-foreground =  ${colors.background}
+format-padding = 1
 
 ramp-0 =" "
 ramp-1 =" "
 ramp-2 =" "
-ramp-foreground = ${colors.battery}
+ramp-foreground = ${colors.background}
 
 [settings]
 screenchange-reload = true
