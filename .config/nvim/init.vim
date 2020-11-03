@@ -51,7 +51,6 @@
 "
     "Some more Basic stuff
     syntax on
-    set autoindent
     set number relativenumber
     set encoding=utf-8
     set ignorecase
