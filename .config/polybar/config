@@ -29,15 +29,16 @@ alert = #e06c75
 empty = #abb2bf
 cpu = #98c379
 memory =#56b6c2
-calander = #c678dd
+calander = #61afef
 battery = #abb2bf
 border = #e06c75
+time = #e5c05b
 
 [bar/example]
 ;monitor = ${env:MONITOR:HDMI-1}
-width = 99%
+width = 100%
 height = 24
-offset-x = .5%
+offset-x = 0%
 offset-y = 0%
 border-color = ${colors.background}
 border-size = 4
@@ -60,8 +61,8 @@ font-3 = FontAwesome:size=12;2.5
 font-4 = JetBrains Mono Nerd Font:size=15;1
 
 modules-left = bspwm
-modules-center = xwindow date
-modules-right = updates-arch-combined temperature memory cpu
+modules-center = xwindow
+modules-right = updates-arch-combined date2 date1 temperature memory cpu
 
 tray-position = right
 tray-padding = 2
@@ -91,6 +92,7 @@ interval = 600
 type = internal/xwindow
 format-foreground = ${colors.battery}
 label-font = 1
+label-maxlen = 50
 label = %title%
 
 [module/filesystem]
@@ -173,15 +175,27 @@ format-padding = 1
 format-prefix = "  "
 label = %percentage_used%
 
-[module/date]
+[module/date1]
 type = internal/date
 interval = 60
 format-padding = 1
+format-background = ${colors.calander}
+format-foreground = ${colors.background}
 
 date = "%b%d"
+
+label =  %date%
+
+[module/date2]
+type = internal/date
+interval = 60
+format-padding = 1
+format-background = ${colors.time}
+format-foreground = ${colors.background}
+
 time = "%I:%M%p"
 
-label = %date% %time%
+label =羽 %time%
 
 [module/pulseaudio]
 type = internal/pulseaudio
