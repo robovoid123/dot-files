@@ -125,8 +125,7 @@
     let g:fzf_layout = { 'down': '~40%' }
 
 
-    nnoremap // :BLines<CR>
-    nnoremap ?? :Rg<CR>
+    nnoremap // :Rg<CR>
     "
     " Enable file type detection.
     " Also load indent files, to automatically do language-dependent indenting.
@@ -293,6 +292,10 @@
     " Spell-check set to <leader>o, 'o' for 'orthography':
     nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
         nnoremap <leader>O  z=
+"
+    "vimwiki
+    " let g:vimwiki_list = [{'path': '~/vimwiki/',
+    "                     \ 'syntax': 'markdown', 'ext': '.md'}]
 "
     " Key bindings
     inoremap jk <esc>

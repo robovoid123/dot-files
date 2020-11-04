@@ -128,6 +128,7 @@ label-occupied-padding = 1
 label-urgent =类 %name%
 label-urgent-font = 1
 label-urgent-background = ${colors.alert}
+label-urgent-foreground = ${colors.background}
 label-urgent-padding = 1
 
 label-empty =
