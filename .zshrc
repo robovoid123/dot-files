@@ -40,12 +40,11 @@ bindkey -v '^?' backward-delete-char
 plugins=(
 	git
     extract
-    last-working-dir
 	zsh-autosuggestions
     zsh-syntax-highlighting
+    python
 	sudo
 	vi-mode
-    python
     colored-man-pages
 	zsh-z
     tmux
@@ -71,6 +70,7 @@ alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias R="ranger"
 alias vim=nvim
 alias vi=nvim
+alias aconda="source ~/anaconda3/bin/activate"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -78,3 +78,5 @@ alias vi=nvim
 
 
 source /home/robovoid/.config/broot/launcher/bash/br
+
+

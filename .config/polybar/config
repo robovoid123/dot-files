@@ -62,7 +62,7 @@ font-4 = JetBrains Mono Nerd Font:size=15;1
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = updates-arch-combined date2 date1 temperature memory cpu
+modules-right = updates-arch-combined pulseaudio date2 date1 temperature memory cpu
 
 tray-position = right
 tray-padding = 2
@@ -207,7 +207,7 @@ label-volume-foreground = ${colors.background}
 label-volume-background = ${colors.calander}
 
 label-muted =  muted
-label-muted-foreground = ${colors.background}
+label-muted-foreground = ${colors.primary}
 
 bar-volume-width = 6
 bar-volume-padding = 1

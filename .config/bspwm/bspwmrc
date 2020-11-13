@@ -4,6 +4,7 @@ bspc rule -r "*"
 
 killall polybar example
 killall sxhkd
+killall xfce4-power-manager
 killall dunst
 killall picom
 killall udiskie
@@ -11,6 +12,7 @@ killall nm-applet
 killall optimus-manager-qt
 
 sxhkd &
+xfce4-power-manager &
 polybar example &
 picom &
 dunst &
