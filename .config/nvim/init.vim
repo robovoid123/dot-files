@@ -38,15 +38,13 @@
         Plug 'sheerun/vim-polyglot' " Language pack
         Plug 'vimwiki/vimwiki' " Vim note taking
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
-        Plug 'joshdick/onedark.vim'
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
+        Plug 'sainnhe/gruvbox-material' " Colorscheme
         Plug 'edkolev/tmuxline.vim' "To generate tmuxline same as vim theme
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'tmhedberg/simpylfold' "Makes python folding bearable
         Plug 'rrethy/vim-illuminate' " Highlights word currently under cursor
         Plug 'tpope/vim-vinegar' "Enhances netrw
-        Plug 'junegunn/limelight.vim'
-        Plug 'junegunn/goyo.vim'
     call plug#end()
 "
     "Some more Basic stuff
@@ -69,8 +67,14 @@
 
     set spelllang=en_us
 
-    colorscheme onedark
-    hi Comment gui=italic
+    let g:gruvbox_material_background = 'hard'
+    colorscheme gruvbox-material
+    let g:gruvbox_material_palette = 'material'
+    set background=dark
+    let g:gruvbox_material_enable_bold = 1
+    let g:gruvbox_material_enable_italic = 1
+
+
 
     set cursorline cursorcolumn
     au WinLeave * set nocursorline nocursorcolumn
@@ -215,7 +219,7 @@
     let g:lightline#bufferline#enable_devicons = 1
     let g:lightline#bufferline#unnamed= '[No Name]'
     let g:lightline = {
-        \ 'colorscheme': 'onedark',
+        \ 'colorscheme': 'gruvbox_material',
         \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -282,12 +286,6 @@
     let g:closetag_close_shortcut = '<leader>>'
 
     let g:python3_host_prog = '/usr/bin/python3'
-"
-    "Limelight
-    nnoremap <leader>l :Limelight!! 0.4<cr>
-"
-     "Goyo
-     nnoremap <leader>g :Goyo<cr>:Limelight!! 0.4<cr>
 "
     " Spell-check set to <leader>o, 'o' for 'orthography':
     nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>

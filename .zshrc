@@ -1,5 +1,3 @@
-pfetch
-
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block, everything else may go below.
@@ -9,12 +7,12 @@ fi
 
 
 # Path to your oh-my-zsh installation.
-export ZSH="/home/robovoid/.oh-my-zsh"
+export ZSH="/home/abinashshrestha/.oh-my-zsh"
 PATH=~/scripts:$PATH
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # path to scripts
-PATH=/home/robovoid/scripts:/home/robovoid/.local/bin:$PATH
+PATH=/home/abinashshrestha/scripts:/home/abinashshrestha/.local/bin:$PATH
 
 # colors
 #autoload -U colors && colors
@@ -75,8 +73,4 @@ alias aconda="source ~/anaconda3/bin/activate"
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-
-
-source /home/robovoid/.config/broot/launcher/bash/br
-
-
+xmodmap ~/.Xmodmap
