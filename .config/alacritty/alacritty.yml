@@ -152,7 +152,7 @@ font:
     style: Bold Italic
 
   # Point size
-  size: 12
+  size: 11
 
 
   # Offset is the extra space around each character. `offset.y` can be thought of
@@ -232,7 +232,7 @@ colors:
     magenta: '0x6e4962'
     cyan: '0x5c8482'
     white: '0x828282'
-background_opacity: 0.88
+background_opacity: 1
 
 #selection:
   #semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"

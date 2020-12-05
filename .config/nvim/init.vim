@@ -34,6 +34,9 @@
         Plug 'tpope/vim-commentary' " comment stuff out
         Plug 'tpope/vim-repeat' " Increase the . functionality
         Plug 'tpope/vim-fugitive' " Git wrapper
+        Plug 'scrooloose/nerdtree' "nerdtree
+        Plug 'xuyuanp/nerdtree-git-plugin'
+        Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         Plug 'yggdroot/indentline' " Visual for indentation
         Plug 'sheerun/vim-polyglot' " Language pack
         Plug 'vimwiki/vimwiki' " Vim note taking
@@ -44,7 +47,6 @@
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'tmhedberg/simpylfold' "Makes python folding bearable
         Plug 'rrethy/vim-illuminate' " Highlights word currently under cursor
-        Plug 'tpope/vim-vinegar' "Enhances netrw
     call plug#end()
 "
     "Some more Basic stuff
@@ -92,21 +94,28 @@
     set foldlevelstart=99
     endif
 "
-    " Netrw as a file explorer
-
-    let g:netrw_liststyle = 1
-
-    function! NetrwMappings()
-        nnoremap <buffer> <C-l> <C-w>l
-    endfunction
-
-    augroup ProjectDrawer
-        autocmd!
-        autocmd filetype netrw call NetrwMappings()
-    augroup END
 "
     "tmuxline
     let g:tmuxline_powerline_separators = 0
+"
+    " NerdTree
+        map <C-n> :NERDTreeToggle<CR>
+        autocmd StdinReadPre * let s:std_in=1
+        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+        let g:NERDTreeGitStatusIndicatorMapCustom = {
+                \ 'Modified'  :'✹',
+                \ 'Staged'    :'✚',
+                \ 'Untracked' :'✭',
+                \ 'Renamed'   :'➜',
+                \ 'Unmerged'  :'═',
+                \ 'Deleted'   :'✖',
+                \ 'Dirty'     :'✗',
+                \ 'Ignored'   :'☒',
+                \ 'Clean'     :'✔︎',
+                \ 'Unknown'   :'?',
+                \ }
+        let g:NERDTreeLimitedSyntax = 1
 "
     " ctrlsf
     nmap <leader>a :CtrlSF -R ""<Left>

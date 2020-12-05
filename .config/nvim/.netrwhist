@@ -1,6 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =4
-let g:netrw_dirhist_4='/home/abinashshrestha/dot-files/.config/nvim'
+let g:netrw_dirhistcnt =5
+let g:netrw_dirhist_5='/home/abinashshrestha'
+let g:netrw_dirhist_4='/home/abinashshrestha/dot-files'
 let g:netrw_dirhist_3='/home/abinashshrestha/Code/Django/Projects/warmup/mysite/polls'
 let g:netrw_dirhist_2='/home/abinashshrestha/Code/Django/Projects/warmup/mysite'
 let g:netrw_dirhist_1='/home/abinashshrestha/Code/Django/Projects/contactCRUD/contact/contact_app'
@@ -9,4 +10,3 @@ let g:netrw_dirhist_9='/home/abinashshrestha/Code/Django/Projects/contactCRUD/co
 let g:netrw_dirhist_8='/home/abinashshrestha/Code/Django/Projects/contactCRUD/contact'
 let g:netrw_dirhist_7='/home/abinashshrestha/Code/Django/Projects'
 let g:netrw_dirhist_6='/home/abinashshrestha/Code/Django'
-let g:netrw_dirhist_5='/home/abinashshrestha/Code/Django/Projects'
