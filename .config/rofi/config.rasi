@@ -1,4 +1,0 @@
-configuration {
-	theme: "~/.config/rofi/onedark.rasi";
-}
-@import "/usr/share/rofi/themes/Arc-Dark.rasi"
