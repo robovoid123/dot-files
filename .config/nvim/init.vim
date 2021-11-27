@@ -42,7 +42,7 @@
         Plug 'vimwiki/vimwiki' " Vim note taking
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
-        Plug 'sainnhe/gruvbox-material' " Colorscheme
+        Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'edkolev/tmuxline.vim' "To generate tmuxline same as vim theme
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'tmhedberg/simpylfold' "Makes python folding bearable
@@ -69,12 +69,7 @@
 
     set spelllang=en_us
 
-    let g:gruvbox_material_background = 'hard'
-    colorscheme gruvbox-material
-    let g:gruvbox_material_palette = 'material'
-    set background=dark
-    let g:gruvbox_material_enable_bold = 1
-    let g:gruvbox_material_enable_italic = 1
+    colorscheme dracula
 
 
 
@@ -228,7 +223,7 @@
     let g:lightline#bufferline#enable_devicons = 1
     let g:lightline#bufferline#unnamed= '[No Name]'
     let g:lightline = {
-        \ 'colorscheme': 'gruvbox_material',
+        \ 'colorscheme': 'dracula',
         \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
