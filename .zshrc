@@ -50,6 +50,7 @@ plugins=(
 
 source $ZSH/oh-my-zsh.sh
 
+
 # User configuration
 
 # set default editor to nvim
