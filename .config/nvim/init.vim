@@ -1,6 +1,6 @@
 "
     " Basic stuff
-    let mapleader="\<Space>"
+    let mapleader=","
     filetype plugin indent on
     set nocompatible
     set hidden
@@ -24,8 +24,8 @@
                     \ 'coc-clangd',
                     \]
         Plug 'itchyny/lightline.vim' " bottom part of lightline
+        Plug 'yuttie/comfortable-motion.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " FZF
-        Plug 'junegunn/fzf.vim' " Ctrl p but better
         Plug 'alvan/vim-closetag' " Closes tags
         Plug 'mengelbrecht/lightline-bufferline' " top part of lightline
         Plug 'tpope/vim-surround' " ysaw
@@ -38,15 +38,11 @@
         Plug 'xuyuanp/nerdtree-git-plugin'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         Plug 'yggdroot/indentline' " Visual for indentation
-        Plug 'sheerun/vim-polyglot' " Language pack
         Plug 'vimwiki/vimwiki' " Vim note taking
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
         Plug 'dracula/vim', { 'as': 'dracula' }
-        Plug 'edkolev/tmuxline.vim' "To generate tmuxline same as vim theme
         Plug 'christoomey/vim-tmux-navigator'
-        Plug 'tmhedberg/simpylfold' "Makes python folding bearable
-        Plug 'rrethy/vim-illuminate' " Highlights word currently under cursor
     call plug#end()
 "
     "Some more Basic stuff
@@ -243,7 +239,7 @@
 "
     " indent plugin stuff
     let g:indentLine_color_term = 239
-    let g:indentLine_char_list = ['┃', '¦', '┆', '┊']
+    let g:indentLine_char_list = ['➜']
 "
     " Vim close tag
 
