@@ -28,7 +28,7 @@
                     \ 'coc-pairs',
                     \ 'coc-clangd',
                     \]
-        Plug 'mg979/vim-visual-multi'
+        " Plug 'mg979/vim-visual-multi'
         Plug 'itchyny/lightline.vim' " bottom part of lightline
         Plug 'yuttie/comfortable-motion.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " FZF
@@ -146,7 +146,7 @@
 
     " Always show the signcolumn, otherwise it would shift the text each time
     " diagnostics appear/become resolved.
-    if has("patch-8.1.1564")
+    if has("nvim-0.5.0") || has("patch-8.1.1564")
     " Recently vim can merge signcolumn and number column into one
     set signcolumn=number
     else
@@ -177,6 +177,15 @@
         call CocAction('doHover')
     endif
     endfunction
+    " Highlight the symbol and its references when holding the cursor.
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Symbol renaming.
+    nmap <leader>r <Plug>(coc-rename)
+
+    " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
 
     augroup mygroup
     autocmd!
