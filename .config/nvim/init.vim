@@ -7,7 +7,12 @@
     set termguicolors
     set clipboard+=unnamedplus
     set splitbelow splitright
-"
+
+    " Auto indent pasted text
+    nnoremap p p=`]<C-o>
+    nnoremap P P=`]<C-o>
+
+
     " Vim Plug plugin manager
     call plug#begin('~/.vim/plugged')
         Plug 'neoclide/coc.nvim', {'branch': 'release'} "Completion engine
@@ -23,10 +28,11 @@
                     \ 'coc-pairs',
                     \ 'coc-clangd',
                     \]
+        Plug 'mg979/vim-visual-multi'
         Plug 'itchyny/lightline.vim' " bottom part of lightline
         Plug 'yuttie/comfortable-motion.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " FZF
-        Plug 'alvan/vim-closetag' " Closes tags
+        Plug 'junegunn/fzf.vim'
         Plug 'mengelbrecht/lightline-bufferline' " top part of lightline
         Plug 'tpope/vim-surround' " ysaw
         Plug 'honza/vim-snippets' " for snippets
@@ -43,8 +49,9 @@
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
         Plug 'dracula/vim', { 'as': 'dracula' }
         Plug 'christoomey/vim-tmux-navigator'
-    call plug#end()
-"
+        call plug#end()
+
+
     "Some more Basic stuff
     syntax on
     set number relativenumber
@@ -76,18 +83,7 @@
     " Remove trailing whitespace on save
     autocmd BufWritePre * %s/\s\+$//e
 "
-    " Folding
-    if has('folding')
-    if has('windows')
-        set fillchars=vert:┃              " BOX DRAWINGS HEAVY VERTICAL (U+2503, UTF-8: E2 94 83)
-    endif
-    set foldmethod=indent               " not as cool as syntax, but faster
-    set foldlevelstart=99
-    endif
-"
-"
-    "tmuxline
-    let g:tmuxline_powerline_separators = 0
+
 "
     " NerdTree
         map <C-n> :NERDTreeToggle<CR>
@@ -122,23 +118,27 @@
         \ }
 "
     " fzf
-    let $FZF_DEFAULT_COMMAND = 'rg --files --hidden --glob "!.git/*"'
+        let $FZF_DEFAULT_COMMAND = 'rg --files --ignore-case --hidden -g "!{.git,node_modules, vendor}/*"'
 
-    " Default fzf layout
-    " - down / up / left / right
-    let g:fzf_layout = { 'down': '~40%' }
+        command! -bang -nargs=? -complete=dir Files
+                    \call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+        " Default fzf layout
+        " - down / up / left / right
+        let g:fzf_layout = {
+                    \'window': {
+                    \'width': 0.9,
+                    \'height': 0.8,
+                    \}
+                    \}
+
+        let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
 
 
-    nnoremap // :Rg<CR>
-    "
-    " Enable file type detection.
-    " Also load indent files, to automatically do language-dependent indenting.
-    filetype plugin indent on
-
-    " Find files with fzf
-    nmap <C-p> :Files<CR>
-    nmap <leader>p :Commands<CR>
-"
+        " Find files with fzf
+        nmap <C-p> :Files<CR>
+        nmap <leader>p :Commands<CR>
+ "
     " CoC Config
     set cmdheight=1
     set updatetime=300
@@ -215,7 +215,7 @@
     " lightline
     " get rid of --insert--
     set noshowmode
-    let g:lightline#bufferline#show_number  = 1
+    let g:lightline#bufferline#show_number  = 2
     let g:lightline#bufferline#enable_devicons = 1
     let g:lightline#bufferline#unnamed= '[No Name]'
     let g:lightline = {
@@ -240,72 +240,33 @@
     " indent plugin stuff
     let g:indentLine_color_term = 239
     let g:indentLine_char_list = ['➜']
-"
-    " Vim close tag
 
 
-    " filenames like *.xml, *.html, *.xhtml, ...
-    " These are the file extensions where this plugin is enabled.
-    "
-    let g:closetag_filenames = '*.html,*.xhtml,*.phtml, *,js, *.ts, *.jsx'
-
-    " filenames like *.xml, *.xhtml, ...
-    " This will make the list of non-closing tags self-closing in the specified files.
-    "
-    let g:closetag_xhtml_filenames = '*.xhtml,*.jsx, *js, *.ts'
-
-    " filetypes like xml, html, xhtml, ...
-    " These are the file types where this plugin is enabled.
-    "
-    let g:closetag_filetypes = 'html,xhtml,phtml, js'
-
-    " filetypes like xml, xhtml, ...
-    " This will make the list of non-closing tags self-closing in the specified files.
-    "
-    let g:closetag_xhtml_filetypes = 'xhtml,jsx, js'
-
-    " integer value [0|1]
-    " This will make the list of non-closing tags case-sensitive (e.g. `<Link>` will be closed while `<link>` won't.)
-    "
-    let g:closetag_emptyTags_caseSensitive = 1
-
-    " dict
-    " Disables auto-close if not in a "valid" region (based on filetype)
-    "
-    let g:closetag_regions = {
-        \ 'typescript.tsx': 'jsxRegion,tsxRegion',
-        \ 'javascript.jsx': 'jsxRegion',
-        \ }
-
-    " Shortcut for closing tags, default is '>'
-    "
-    let g:closetag_shortcut = '>'
-
-    " Add > at current position without closing the current tag, default is ''
-    "
-    let g:closetag_close_shortcut = '<leader>>'
-
-    let g:python3_host_prog = '/usr/bin/python3'
 "
     " Spell-check set to <leader>o, 'o' for 'orthography':
     nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
-        nnoremap <leader>O  z=
+    nnoremap <leader>O  z=
 "
     "vimwiki
     " let g:vimwiki_list = [{'path': '~/vimwiki/',
     "                     \ 'syntax': 'markdown', 'ext': '.md'}]
 "
-    " Key bindings
-    inoremap jk <esc>
-    vnoremap jk <esc>
+" Key bindings
+"
+        inoremap jk <esc>
+        vnoremap jk <esc>
+        tnoremap jk <C-\><C-n>
 
-    tnoremap jk <C-\><C-n>
 
+        nnoremap <leader>ev :edit $MYVIMRC<cr>
+        nnoremap <leader>sv :source $MYVIMRC<cr>
 
-    nnoremap <leader>ev :vsplit $MYVIMRC<cr>
-    nnoremap <leader>sv :source $MYVIMRC<cr>
+        nnoremap <leader>v :vsplit<cr><C-w>w
+        nnoremap <leader>V :split<cr><C-w>j
 
-    nnoremap <leader>v :vsplit<Return><C-w>w
+        nmap <C-_> <Plug>Commentary
+        xmap <C-_> <Plug>Commentary
+        omap <C-_> <Plug>Commentary
 
     " Disable arrow keys in Normal mode
         no <Up> <Nop>
