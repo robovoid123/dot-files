@@ -54,15 +54,15 @@ module-margin = 1
 
 tray-maxsize = 16
 
-font-0 = JetBrains Mono Nerd Font:size=10;2
-font-1 = JetBrains Mono Nerd Font:size=10;2
-font-2 = JetBrains Mono Nerd Font:size=10;1
-font-3 = FontAwesome:size=12;2.5
-font-4 = JetBrains Mono Nerd Font:size=15;1
+font-0 = mononoki Nerd Font Mono:size=10;2
+font-1 = mononoki Nerd Font Mono:size=10;2
+font-2 = mononoki Nerd Font Mono:size=10;1
+font-3 = mononoki Nerd Font Mono:size=10;1
+font-4 = mononoki Nerd Font Mono:size=15;1
 
 modules-left = bspwm
 modules-center = xwindow
-modules-right = updates-arch-combined pulseaudio date2 date1 temperature memory cpu
+modules-right = date2 date1 temperature memory cpu battery
 
 tray-position = right
 tray-padding = 2
@@ -80,13 +80,6 @@ cursor-click = pointer
 cursor-scroll = ns-resize
 
 line-size = 2
-
-[module/updates-arch-combined]
-type = custom/script
-exec = ~/scripts/polybar-scripts/updates-arch-combined.sh
-format-prefix = "  "
-format-prefix-foreground = ${colors.cpu}
-interval = 600
 
 [module/xwindow]
 type = internal/xwindow
@@ -113,7 +106,7 @@ ws-icon-default ="  "
 
 format = <label-state> <label-mode>
 
-label-focused =类 %name%
+label-focused =类.%name%
 label-focused-background = ${colors.memory}
 ; label-focused-color= ${colors.danger}
 label-focused-foreground = ${colors.background}
@@ -161,7 +154,7 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 2
-format-prefix = " "
+format-prefix = " "
 format-background = ${colors.cpu}
 format-foreground =  ${colors.background}
 format-padding = 1
@@ -173,7 +166,7 @@ interval = 20
 format-background = ${colors.memory}
 format-foreground =  ${colors.background}
 format-padding = 1
-format-prefix = "  "
+format-prefix = " "
 label = %percentage_used%
 
 [module/date1]
@@ -185,7 +178,7 @@ format-foreground = ${colors.background}
 
 date = "%b%d"
 
-label =  %date%
+label = %date%
 
 [module/date2]
 type = internal/date

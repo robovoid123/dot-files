@@ -24,9 +24,9 @@
                     \ 'coc-pairs',
                     \ 'coc-clangd',
                     \]
-        " Plug 'mg979/vim-visual-multi'
         Plug 'sheerun/vim-polyglot'
         Plug 'itchyny/lightline.vim' " bottom part of lightline
+        Plug 'airblade/vim-gitgutter'
         Plug 'yuttie/comfortable-motion.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " FZF
         Plug 'junegunn/fzf.vim'
@@ -142,7 +142,7 @@
 
     " Always show the signcolumn, otherwise it would shift the text each time
     " diagnostics appear/become resolved.
-    if has("patch-8.1.1564")
+    if has("nvim-0.5.0") || has("patch-8.1.1564")
     " Recently vim can merge signcolumn and number column into one
     set signcolumn=number
     else
@@ -173,6 +173,15 @@
         call CocAction('doHover')
     endif
     endfunction
+    " Highlight the symbol and its references when holding the cursor.
+    autocmd CursorHold * silent call CocActionAsync('highlight')
+
+    " Symbol renaming.
+    nmap <leader>r <Plug>(coc-rename)
+
+    " Formatting selected code.
+    xmap <leader>f  <Plug>(coc-format-selected)
+    nmap <leader>f  <Plug>(coc-format-selected)
 
     augroup mygroup
     autocmd!
@@ -207,6 +216,15 @@
     nmap <silent> gy <Plug>(coc-type-definition)
     nmap <silent> gi <Plug>(coc-implementation)
     nmap <silent> gr <Plug>(coc-references)
+
+    nmap <expr> <silent> <C-d> <SID>select_current_word()
+    function! s:select_current_word()
+    if !get(b:, 'coc_cursors_activated', 0)
+        return "\<Plug>(coc-cursors-word)"
+    endif
+    return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
+    endfunc
+    xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
 "
     " lightline
     " get rid of --insert--
