@@ -8,10 +8,6 @@
     set clipboard+=unnamedplus
     set splitbelow splitright
 
-    " Auto indent pasted text
-    nnoremap p p=`]<C-o>
-    nnoremap P P=`]<C-o>
-
 
     " Vim Plug plugin manager
     call plug#begin('~/.vim/plugged')
@@ -28,7 +24,8 @@
                     \ 'coc-pairs',
                     \ 'coc-clangd',
                     \]
-        Plug 'mg979/vim-visual-multi'
+        " Plug 'mg979/vim-visual-multi'
+        Plug 'sheerun/vim-polyglot'
         Plug 'itchyny/lightline.vim' " bottom part of lightline
         Plug 'yuttie/comfortable-motion.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " FZF
@@ -44,7 +41,6 @@
         Plug 'xuyuanp/nerdtree-git-plugin'
         Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
         Plug 'yggdroot/indentline' " Visual for indentation
-        Plug 'vimwiki/vimwiki' " Vim note taking
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
         Plug 'dracula/vim', { 'as': 'dracula' }
@@ -74,7 +70,7 @@
 
     colorscheme dracula
 
-
+    hi Normal guibg=NONE ctermbg=NONE
 
     set cursorline cursorcolumn
     au WinLeave * set nocursorline nocursorcolumn
@@ -86,23 +82,22 @@
 
 "
     " NerdTree
-        map <C-n> :NERDTreeToggle<CR>
-        autocmd StdinReadPre * let s:std_in=1
-        autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-        autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-        let g:NERDTreeGitStatusIndicatorMapCustom = {
-                \ 'Modified'  :'✹',
-                \ 'Staged'    :'✚',
-                \ 'Untracked' :'✭',
-                \ 'Renamed'   :'➜',
-                \ 'Unmerged'  :'═',
-                \ 'Deleted'   :'✖',
-                \ 'Dirty'     :'✗',
-                \ 'Ignored'   :'☒',
-                \ 'Clean'     :'✔︎',
-                \ 'Unknown'   :'?',
-                \ }
-        let g:NERDTreeLimitedSyntax = 1
+    map <leader>n :NERDTreeToggle<CR>
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    let g:NERDTreeGitStatusIndicatorMapCustom = {
+            \ 'Modified'  :'✹',
+            \ 'Staged'    :'✚',
+            \ 'Untracked' :'✭',
+            \ 'Renamed'   :'➜',
+            \ 'Unmerged'  :'═',
+            \ 'Deleted'   :'✖',
+            \ 'Dirty'     :'✗',
+            \ 'Ignored'   :'☒',
+            \ 'Clean'     :'✔︎',
+            \ 'Unknown'   :'?',
+            \ }
+    let g:NERDTreeLimitedSyntax = 1
 "
     " ctrlsf
     nmap <leader>a :CtrlSF -R ""<Left>
@@ -140,6 +135,7 @@
         nmap <leader>p :Commands<CR>
  "
     " CoC Config
+    "
     set cmdheight=1
     set updatetime=300
     set shortmess+=c
@@ -247,10 +243,6 @@
     nnoremap <leader>o :setlocal spell! spelllang=en_us<CR>
     nnoremap <leader>O  z=
 "
-    "vimwiki
-    " let g:vimwiki_list = [{'path': '~/vimwiki/',
-    "                     \ 'syntax': 'markdown', 'ext': '.md'}]
-"
 " Key bindings
 "
         inoremap jk <esc>
@@ -264,9 +256,9 @@
         nnoremap <leader>v :vsplit<cr><C-w>w
         nnoremap <leader>V :split<cr><C-w>j
 
-        nmap <C-_> <Plug>Commentary
-        xmap <C-_> <Plug>Commentary
-        omap <C-_> <Plug>Commentary
+        nmap <C-_> :Commentary<cr>
+        xmap <C-_> :Commentary<cr>
+        omap <C-_> :Commentary<cr>
 
     " Disable arrow keys in Normal mode
         no <Up> <Nop>
@@ -294,3 +286,8 @@
         tnoremap <C-k> <C-\><C-N><C-w>k
         tnoremap <C-l> <C-\><C-N><C-w>l
 
+       " nnoremap <leader>b :b<space>
+       nnoremap <leader>b :b<space>
+       nnoremap <leader>bn :bn<cr>
+       nnoremap <leader>bp :bp<cr>
+       nnoremap <leader>bd :bd<cr>
