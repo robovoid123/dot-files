@@ -5,15 +5,11 @@ bspc rule -r "*"
 killall polybar example
 killall sxhkd
 killall picom
-killall udiskie
 killall nm-applet
-killall optimus-manager-qt
 
 sxhkd &
 polybar example &
 picom &
-udiskie &
-optimus-manager-qt &
 nm-applet &
 nitrogen --restore &
 

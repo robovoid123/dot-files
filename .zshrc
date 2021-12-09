@@ -64,3 +64,6 @@ alias vim=nvim
 alias vi=nvim
 alias aconda="source ~/anaconda3/bin/activate"
 alias py="python3"
+alias bat=batcat
+alias ls="exa --icons"
+alias cat=batcat
