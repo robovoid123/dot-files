@@ -202,7 +202,7 @@ colors:
     magenta: '#ff92d0'
     cyan: '#9aedfe'
     white: '#e6e6e6'
-background_opacity: 1
+background_opacity: 0.9
 
 import:
   - ~/.config/alacritty/alacritty-master/alacritty-master/dracula.yml

@@ -1,14 +1,3 @@
-"
-    " Basic stuff
-    let mapleader=","
-    filetype plugin indent on
-    set nocompatible
-    set hidden
-    set termguicolors
-    set clipboard+=unnamedplus
-    set splitbelow splitright
-
-
     " Vim Plug plugin manager
     call plug#begin('~/.vim/plugged')
         Plug 'neoclide/coc.nvim', {'branch': 'release'} "Completion engine
@@ -24,6 +13,8 @@
                     \ 'coc-pairs',
                     \ 'coc-clangd',
                     \]
+
+        Plug 'alvan/vim-closetag'
         Plug 'sheerun/vim-polyglot'
         Plug 'itchyny/lightline.vim' " bottom part of lightline
         Plug 'airblade/vim-gitgutter'
@@ -48,7 +39,14 @@
         call plug#end()
 
 
-    "Some more Basic stuff
+    " Basic stuff
+    let mapleader=","
+    filetype plugin indent on
+    set nocompatible
+    set hidden
+    set termguicolors
+    set clipboard+=unnamedplus
+    set splitbelow splitright
     syntax on
     set number relativenumber
     set encoding=utf-8
@@ -254,6 +252,18 @@
     " indent plugin stuff
     let g:indentLine_color_term = 239
     let g:indentLine_char_list = ['➜']
+
+
+    "-- FOLDING --
+    set foldmethod=syntax "syntax highlighting items specify folds
+    set foldcolumn=1 "defines 1 col at window left, to indicate folding
+    let javaScript_fold=1 "activate folding by JS syntax
+    set foldlevelstart=99 "start file with all folds opened
+
+    " close all buffers except current one
+    command! BufCurOnly execute '%bdelete|edit#|bdelete#'
+    " Close all buffers but current
+    nnoremap <C-B>c :BufCurOnly<CR>
 
 
 "
