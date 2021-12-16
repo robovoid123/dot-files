@@ -16,11 +16,11 @@
 
         Plug 'alvan/vim-closetag'
         Plug 'sheerun/vim-polyglot'
-        Plug 'itchyny/lightline.vim' " bottom part of lightline
         Plug 'airblade/vim-gitgutter'
         Plug 'yuttie/comfortable-motion.vim'
         Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " FZF
         Plug 'junegunn/fzf.vim'
+        Plug 'itchyny/lightline.vim' " bottom part of lightline
         Plug 'mengelbrecht/lightline-bufferline' " top part of lightline
         Plug 'tpope/vim-surround' " ysaw
         Plug 'honza/vim-snippets' " for snippets
@@ -34,8 +34,9 @@
         Plug 'yggdroot/indentline' " Visual for indentation
         Plug 'dyng/ctrlsf.vim' " Quick way to edit multiple file
         Plug 'machakann/vim-highlightedyank' "Highlights the currently yanked section
-        Plug 'dracula/vim', { 'as': 'dracula' }
+        Plug 'arcticicestudio/nord-vim'
         Plug 'christoomey/vim-tmux-navigator'
+        Plug 'edkolev/tmuxline.vim'
         call plug#end()
 
 
@@ -66,7 +67,7 @@
 
     set spelllang=en_us
 
-    colorscheme dracula
+    colorscheme nord
 
     hi Normal guibg=NONE ctermbg=NONE
 
@@ -125,7 +126,7 @@
                     \}
                     \}
 
-        let $FZF_DEFAULT_OPTS="--ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
+        let $FZF_DEFAULT_OPTS=" --ansi --preview-window 'right:60%' --layout reverse --margin=1,4"
 
 
         " Find files with fzf
@@ -223,7 +224,10 @@
     return "*\<Plug>(coc-cursors-word):nohlsearch\<CR>"
     endfunc
     xmap <silent> <C-d> y/\V<C-r>=escape(@",'/\')<CR><CR>gN<Plug>(coc-cursors-range)gn
-"
+
+    " :Tmuxline lightline
+    let g:tmuxline_powerline_separators = 0
+
     " lightline
     " get rid of --insert--
     set noshowmode
@@ -231,7 +235,7 @@
     let g:lightline#bufferline#enable_devicons = 1
     let g:lightline#bufferline#unnamed= '[No Name]'
     let g:lightline = {
-        \ 'colorscheme': 'dracula',
+        \ 'colorscheme': 'nord',
         \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
