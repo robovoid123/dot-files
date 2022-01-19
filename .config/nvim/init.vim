@@ -77,11 +77,10 @@
 
     " Remove trailing whitespace on save
     autocmd BufWritePre * %s/\s\+$//e
-"
 
-"
     " NerdTree
     map <leader>n :NERDTreeToggle<CR>
+
     autocmd StdinReadPre * let s:std_in=1
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
     let g:NERDTreeGitStatusIndicatorMapCustom = {
