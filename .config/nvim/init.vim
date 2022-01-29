@@ -37,6 +37,7 @@
         Plug 'arcticicestudio/nord-vim'
         Plug 'christoomey/vim-tmux-navigator'
         Plug 'edkolev/tmuxline.vim'
+Plug 'ayu-theme/ayu-vim'
         call plug#end()
 
 
@@ -67,7 +68,8 @@
 
     set spelllang=en_us
 
-    colorscheme nord
+    let ayucolor="dark"
+    colorscheme ayu
 
     hi Normal guibg=NONE ctermbg=NONE
 
@@ -234,7 +236,7 @@
     let g:lightline#bufferline#enable_devicons = 1
     let g:lightline#bufferline#unnamed= '[No Name]'
     let g:lightline = {
-        \ 'colorscheme': 'nord',
+        \ 'colorscheme': 'ayu',
         \ 'active': {
             \   'left': [ [ 'mode', 'paste' ],
             \             ['cocstatus', 'gitbranch', 'readonly', 'filename', 'modified' ] ]
