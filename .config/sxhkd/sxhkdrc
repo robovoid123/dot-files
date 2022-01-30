@@ -8,7 +8,7 @@ super + Return
 
 # program launcher
 super + @space
-	rofi -show drun -show-icons -font "JetBrains Mono Nerd Font 12"
+    ~/.config/polybar/forest/scripts/launcher.sh
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -101,13 +101,7 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 super + ctrl + p
-	~/scripts/shutdown
-
-super + ctrl + o
-	~/scripts/monitor.py
-
-super + ctrl + c
-    ~/scripts/list.sh
+    ~/.config/polybar/forest/scripts/powermenu.sh
 
 super + b
     firefox
@@ -116,13 +110,16 @@ super + f
     alacritty -e ranger
 
 XF86MonBrightnessDown
-	~/scripts/changebrightness.sh -U 5
+	~/.scripts/changebrightness.sh -dec 5
+
 XF86MonBrightnessUp
-	~/scripts/changebrightness.sh -A 5
+	~/.scripts/changebrightness.sh -inc 5
 
 XF86AudioRaiseVolume
-    /home/robovoid/scripts/changevolume.sh 5+
+    ~/.scripts/changevolume.sh 5+
+
 XF86AudioLowerVolume
-    /home/robovoid/scripts/changevolume.sh 5-
+    ~/.scripts/changevolume.sh 5-
+
 XF86AudioMute
-    /home/robovoid/scripts/changevolume.sh toggle
+    ~/.scripts/changevolume.sh toggle

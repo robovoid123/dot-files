@@ -1,11 +1,10 @@
 # Path to your oh-my-zsh installation.
 export ZSH="/home/void/.oh-my-zsh"
-PATH=~/scripts:$PATH
-ZSH_THEME="dracula"
+ZSH_THEME="spaceship"
 BAT_THEME="ansi-dark"
 
 # path to scripts
-PATH=/home/void/scripts:/home/abinashshrestha/.local/bin:$PATH
+PATH=$HOME/.local/bin/:~/.scripts/:$PATH
 
 # colors
 #autoload -U colors && colors
@@ -62,8 +61,11 @@ alias nvimrc="nvim ~/.config/nvim/init.vim"
 alias R="ranger"
 alias vim=nvim
 alias vi=nvim
-alias aconda="source ~/anaconda3/bin/activate"
 alias py="python3"
-alias bat=batcat
 alias ls="exa --icons"
-alias cat=batcat
+alias cat=bat
+alias sudo=doas
+
+# fnm
+export PATH=/home/void/.fnm:$PATH
+eval "`fnm env`"

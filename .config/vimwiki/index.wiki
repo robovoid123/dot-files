@@ -1,3 +1,0 @@
-== TODO tasks ==
-* [[Djecommerce]]
-* {{zoom link}}
