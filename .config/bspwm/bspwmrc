@@ -6,12 +6,16 @@ killall ~/.config/polybar/launch.sh --forest
 killall sxhkd
 killall picom
 killall nm-applet
+killall flameshot
+killall udiskie
 
 sxhkd &
 ~/.config/polybar/launch.sh --forest &
 picom &
 nm-applet &
 nitrogen --restore &
+flameshot &
+udiskie &
 
 bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 

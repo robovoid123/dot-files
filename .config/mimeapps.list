@@ -1,5 +1,6 @@
 [Default Applications]
 x-scheme-handler/tg=userapp-Telegram Desktop-62ZKG1.desktop
+x-scheme-handler/postman=Postman.desktop
 
 [Added Associations]
 x-scheme-handler/tg=userapp-Telegram Desktop-62ZKG1.desktop;
